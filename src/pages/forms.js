@@ -200,9 +200,13 @@ function renderContact(ctx) {
         <div class="service-mini">
           <h3 class="service-mini__title" data-i18n="contact.hours">${C.esc(tfn('contact.hours'))}</h3>
           <ul>
-            ${services.map((s) => `<li><span class="service-mini__day" data-i18n="days.${s.day}">${C.esc(tfn(`days.${s.day}`))}</span><span ${C.locAttr(s, 'name', locale)}>${C.esc(C.loc(s, 'name', locale))}</span><span class="service-mini__time">${C.esc(s.start_time)}</span></li>`).join('')}
+            ${services.map((s) => `<li><span class="service-mini__day" data-i18n="days.${s.day}">${C.esc(tfn(`days.${s.day}`))}</span><span ${C.locAttr(s, 'name', locale)}>${C.esc(C.loc(s, 'name', locale))}</span><span class="service-mini__time">${C.esc(s.start_time || tfn('common.tba'))}</span></li>`).join('')}
           </ul>
-          <p class="note note--inline">${C.iconUse('sparkle')}<span data-i18n="info.sampleNote">${C.esc(tfn('info.sampleNote'))}</span></p>
+          ${services.some((s) => !s.start_time)
+            ? `<p class="note note--inline">${C.iconUse('sparkle')}<span data-i18n="services.timeNote">${C.esc(tfn('services.timeNote'))}</span></p>`
+            : services.some((s) => s.is_sample)
+            ? `<p class="note note--inline">${C.iconUse('sparkle')}<span data-i18n="info.sampleNote">${C.esc(tfn('info.sampleNote'))}</span></p>`
+            : ''}
         </div>
         ${mapQuery
           ? `<div class="map-embed"><iframe title="${C.esc(tfn('contact.mapTitle'))}" src="https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>`
@@ -312,7 +316,10 @@ function renderVisit(ctx) {
                 <div class="select-field select-field--full">
                   <select id="visit-service" name="service">
                     <option value="" data-i18n="forms.selectService">${C.esc(tfn('forms.selectService'))}</option>
-                    ${services.map((s) => `<option value="${C.esc(`${s.name_en} — ${s.start_time}`)}">${C.esc(C.loc(s, 'name', locale))} — ${C.esc(tfn(`days.${s.day}`))} ${C.esc(s.start_time)}</option>`).join('')}
+                    ${services.map((s) => {
+                      const time = s.start_time || tfn('common.tba');
+                      return `<option value="${C.esc(`${s.name_en} — ${time}`)}">${C.esc(C.loc(s, 'name', locale))} — ${C.esc(tfn(`days.${s.day}`))} · ${C.esc(time)}</option>`;
+                    }).join('')}
                   </select>
                   ${C.iconUse('chevron-down')}
                 </div>

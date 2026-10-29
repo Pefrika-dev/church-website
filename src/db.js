@@ -197,29 +197,6 @@ function nowIso() {
   return new Date().toISOString();
 }
 
-function localDateTime(date) {
-  const pad = (n) => String(n).padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
-}
-
-function nextWeekday(day, hour, minute, weeksAhead = 0) {
-  const date = new Date();
-  date.setHours(hour, minute, 0, 0);
-  let delta = (day - date.getDay() + 7) % 7;
-  if (delta === 0) delta = 7;
-  date.setDate(date.getDate() + delta + weeksAhead * 7);
-  return localDateTime(date);
-}
-
-function pastSunday(weeksAgo = 1) {
-  const date = new Date();
-  date.setHours(9, 0, 0, 0);
-  let delta = date.getDay();
-  if (delta === 0) delta = 7;
-  date.setDate(date.getDate() - delta - (weeksAgo - 1) * 7);
-  return date.toISOString().slice(0, 10);
-}
-
 function open() {
   if (db) return db;
   fs.mkdirSync(config.paths.data, { recursive: true });
@@ -280,81 +257,73 @@ function seed() {
 
   if (!get('SELECT id FROM announcements LIMIT 1')) {
     const rows = [
-      ['Sunday worship at 09:00 and 11:30 — every generation is welcome.', 'Ibada ya Jumapili saa 09:00 na 11:30 — kila kizazi kinakaribishwa.', '/visit'],
-      ['New here? Join the next welcome class after the second service.', 'Mgeni? Jiunge na darasa la ukaribishaji baada ya ibada ya pili.', '/visit'],
-      ['Midweek Bible study gathers on Wednesdays at 18:00 in the fellowship hall.', 'Darasa la Biblia la katikati ya wiki hukutana Jumatano saa 18:00 katika ukumbi wa ushirika.', '/ministries'],
+      ['Worship with us every Sabbath at Migori Central — all are welcome.', 'Abudu nasi kila Sabato huko Migori Central — kila mtu anakaribishwa.', '/visit'],
+      ['Sabbath services are livestreamed on the church’s YouTube channel.', 'Ibada za Sabato zinaonyeshwa moja kwa moja kwenye chaneli ya YouTube ya kanisa.', '/sermons'],
+      ['Catch up on recent sermons, including the weekly Sabbath School lessons.', 'Fuatilia mahubiri ya hivi karibuni, ikiwemo masomo ya kila wiki ya Shule ya Sabato.', '/sermons'],
     ];
     rows.forEach((r, i) => {
       run(
         `INSERT INTO announcements (message_en, message_sw, link, is_active, sort_order, is_sample, created_at, updated_at)
-         VALUES (?, ?, ?, 1, ?, 1, ?, ?)`,
+         VALUES (?, ?, ?, 1, ?, 0, ?, ?)`,
         [r[0], r[1], r[2], i, stamp, stamp]
       );
     });
   }
 
   if (!get('SELECT id FROM service_times LIMIT 1')) {
+    // Sabbath start times are not published by the church, so they are left blank
+    // and rendered as "To be announced" until the church confirms them.
     const rows = [
-      ['First Service', 'Ibada ya Kwanza', 0, '09:00', '75 min', 'A quieter gathering with traditional worship and a full children’s programme.', 'Mkusanyiko wa utulivu wenye ibada ya kitamaduni na programu kamili ya watoto.', 1],
-      ['Second Service', 'Ibada ya Pili', 0, '11:30', '90 min', 'Our main Sunday gathering with worship, teaching and children’s ministry.', 'Mkusanyiko wetu mkuu wa Jumapili wenye sifa, mafundisho na huduma ya watoto.', 2],
-      ['Bible Study', 'Darasa la Biblia', 3, '18:00', '60 min', 'Midweek teaching and discussion in small groups.', 'Mafundisho na majadiliano ya katikati ya wiki katika vikundi vidogo.', 3],
-      ['Prayer Meeting', 'Mkutano wa Maombi', 5, '18:00', '60 min', 'An hour of prayer for the church, the community and the nations.', 'Saa moja ya maombi kwa ajili ya kanisa, jamii na mataifa.', 4],
+      ['Sabbath School', 'Shule ya Sabato', 6, '', '', 'Classes for children, youth and adults studying the Sabbath School lesson together.', 'Madarasa ya watoto, vijana na wazee wakijifunza somo la Shule ya Sabato pamoja.', 1],
+      ['Divine Service', 'Ibada Kuu', 6, '', '', 'The main Sabbath gathering with worship, prayer, Scripture and preaching.', 'Mkusanyiko mkuu wa Sabato wenye sifa, maombi, Maandiko na mahubiri.', 2],
+      ['Prayer Service', 'Ibada ya Maombi', 3, '17:30', '', 'Midweek prayer for the church, the community and the nations.', 'Maombi ya katikati ya wiki kwa ajili ya kanisa, jamii na mataifa.', 3],
     ];
     rows.forEach((r) => {
       run(
         `INSERT INTO service_times (name_en, name_sw, day, start_time, duration, description_en, description_sw, is_active, is_sample, sort_order)
-         VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, ?)`,
+         VALUES (?, ?, ?, ?, ?, ?, ?, 1, 0, ?)`,
         [r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]]
       );
     });
   }
 
   if (!get('SELECT id FROM sermons LIMIT 1')) {
+    // Titles, speakers, dates and video links taken from the church's public YouTube channel.
+    const descriptionEn = 'Recorded at Migori Central SDA Church and published on the church’s YouTube channel.';
+    const descriptionSw = 'Ilirekodiwa katika Kanisa la SDA la Migori Central na kuchapishwa kwenye chaneli ya YouTube ya kanisa.';
     const rows = [
-      ['Anchored in Hope', 'Imethibitishwa katika Tumaini', '[Senior Pastor’s Name]', pastSunday(1), 'Hebrews 6:19', 'A reflection on holding fast to the promises of God when the road ahead is unclear.', 'Tafakari kuhusu kushikilia ahadi za Mungu wakati njia iliyo mbele haijulikani.', 'preaching', 1],
-      ['The Gift of Sabbath', 'Zawadi ya Sabato', '[Guest Speaker]', pastSunday(2), 'Mark 2:27', 'Rest is not a reward for finishing; it is a rhythm of trust that God invites us into.', 'Mapumziko si malipo ya kumaliza; ni mdundo wa imani ambao Mungu anatusihi tuingie.', 'worship', 2],
-      ['Walking in Step with the Spirit', 'Kutembea kwa Roho', '[Senior Pastor’s Name]', pastSunday(3), 'Galatians 5:25', 'What it looks like to live led by the Spirit in ordinary, everyday faithfulness.', 'Inavyoonekana kuishi kwa kuongozwa na Roho katika uaminifu wa kila siku.', 'bible-study', 3],
+      ['Remember Your First Love', 'Kumbuka Upendo Wako wa Kwanza', 'Elder Richard Mareri', '2026-10-24', '', 'syoSKRuSADE', 'remember-your-first-love-1200.jpg'],
+      ['Spirit of Prophecy: Ellen G. White — Her Life & Calling', 'Roho ya Unabii: Ellen G. White — Maisha na Wito Wake', 'Bro. Victor Caleb', '2026-10-17', '', 'Tnaf2SZyG7Y', 'spirit-of-prophecy-ellen-white-1200.jpg'],
+      ['I’m Getting Used to This', 'Ninazoea Hili', 'Ev. Thomas Nyarwanda', '2026-10-17', 'Acts 28:5', 'cbgPNwA73lc', 'getting-used-to-this-1200.jpg'],
+      ['Our God of Liberty', 'Mungu Wetu wa Uhuru', 'Elder Rodgers Abisai', '2026-10-10', '2 Corinthians 3:17', 'ZQGrXdsjCGU', 'our-god-of-liberty-1200.jpg'],
+      ['Prayer & Fasting', 'Maombi na Kufunga', 'Pr. Benard Okoko', '2026-10-03', '', 'f5iLhm8Iz28', 'prayer-and-fasting-1200.jpg'],
+      ['Determined to the End', 'Kusimama Hadi Mwisho', 'Elder Collins Bala', '2026-09-26', '', 'avOpUhnYl5Y', 'determined-to-the-end-1200.jpg'],
     ];
     rows.forEach((r) => {
       run(
-        `INSERT INTO sermons (title_en, title_sw, speaker, preached_on, scripture, description_en, description_sw, thumbnail, is_published, is_sample, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 1, ?, ?)`,
-        [r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], stamp, stamp]
+        `INSERT INTO sermons (title_en, title_sw, speaker, preached_on, scripture, description_en, description_sw, video_url, thumbnail, is_published, is_sample, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0, ?, ?)`,
+        [r[0], r[1], r[2], r[3], r[4], descriptionEn, descriptionSw, `https://www.youtube.com/watch?v=${r[5]}`, `/assets/img/sermons/${r[6]}`, stamp, stamp]
       );
     });
   }
 
-  if (!get('SELECT id FROM events LIMIT 1')) {
-    const rows = [
-      ['Community Prayer Evening', 'Jioni ya Maombi ya Jamii', nextWeekday(5, 19, 0), nextWeekday(5, 20, 30), 'Main Sanctuary', 'An open evening of prayer and intercession for our community. All are welcome.', 'Jioni ya wazi ya maombi na maombezi kwa ajili ya jamii yetu. Kila mtu anakaribishwa.', 'prayer'],
-      ['Youth Worship Night', 'Usiku wa Ibada ya Vijana', nextWeekday(6, 17, 0), nextWeekday(6, 20, 0), 'Youth Hall', 'An evening of worship, testimony and connection for young people.', 'Jioni ya sifa, ushuhuda na ushirika kwa ajili ya vijana.', 'youth'],
-      ['Women’s Fellowship Tea', 'Chai ya Ushirika wa Wanawake', nextWeekday(6, 10, 0, 1), nextWeekday(6, 12, 0, 1), 'Church Courtyard', 'A morning of tea, conversation and encouragement for women of all ages.', 'Asubuhi ya chai, mazungumzo na kutiana moyo kwa wanawake wa rika zote.', 'women'],
-      ['Harvest Thanksgiving Service', 'Ibada ya Shukrani ya Mavuno', nextWeekday(0, 9, 0, 2), nextWeekday(0, 11, 0, 2), 'Main Sanctuary', 'A service of gratitude for God’s provision, with a shared meal afterwards.', 'Ibada ya shukrani kwa utoaji wa Mungu, ikifuatiwa na chakula cha pamoja.', 'choir'],
-    ];
-    rows.forEach((r) => {
-      run(
-        `INSERT INTO events (title_en, title_sw, starts_at, ends_at, venue, description_en, description_sw, poster, is_published, is_sample, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 1, ?, ?)`,
-        [r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], stamp, stamp]
-      );
-    });
-  }
+  // No upcoming events are published by the church yet, so the events table starts empty
+  // and the site shows its honest empty state until staff add real events.
 
   if (!get('SELECT id FROM ministries LIMIT 1')) {
+    // Ministries named in the church's public announcements, sermons and live streams.
     const rows = [
-      ['Children’s Ministry', 'Huduma ya Watoto', 'A safe, joyful place where children discover God’s love through stories, song and play.', 'Mahali salama na pa furaha ambapo watoto hujifunza upendo wa Mungu kupitia hadithi, nyimbo na michezo.', 'children', '', 1],
-      ['Youth Ministry', 'Huduma ya Vijana', 'Young people growing in faith, friendship and purpose.', 'Vijana wanaokua katika imani, urafiki na kusudi.', 'youth', 'youth', 2],
-      ['Women’s Fellowship', 'Ushirika wa Wanawake', 'Women encouraging one another through prayer, study and service.', 'Wanawake wanaotiana moyo kupitia maombi, masomo na huduma.', 'women', 'women', 3],
-      ['Men’s Fellowship', 'Ushirika wa Wanaume', 'Men building godly homes, friendships and service.', 'Wanaume wanaojenga nyumba, urafiki na huduma kwa Mungu.', 'men', '', 4],
-      ['Worship & Praise', 'Uimbaji na Sifa', 'Musicians and singers leading the congregation into worship.', 'Wanamuziki na waimbaji wakiongoza mkutano katika ibada.', 'worship', 'choir', 5],
-      ['Prayer Ministry', 'Huduma ya Maombi', 'Interceding for the church, the community and the nations.', 'Kuiombea kanisa, jamii na mataifa.', 'prayer', 'prayer', 6],
-      ['Outreach & Evangelism', 'Huduma ya Nje na Uinjilisti', 'Serving neighbours with practical love and sharing hope.', 'Kuwahudumia majirani kwa upendo wa vitendo na kushiriki tumaini.', 'outreach', 'outreach', 7],
-      ['Bible Study', 'Darasa la Biblia', 'Growing deeper in God’s Word together, one passage at a time.', 'Kukua kwa kina katika Neno la Mungu pamoja, kifungu kimoja kwa wakati mmoja.', 'bible', 'bible-study', 8],
+      ['Sabbath School', 'Shule ya Sabato', 'Classes for children, youth and adults studying the weekly Sabbath School lesson together before Divine Service.', 'Madarasa ya watoto, vijana na wazee wakijifunza somo la kila wiki la Shule ya Sabato pamoja kabla ya Ibada Kuu.', 'bible', '/assets/img/bible-study-1200.jpg', 1],
+      ['Music & Choir', 'Muziki na Kwaya', 'Singers and musicians leading the congregation in praise and worship each Sabbath.', 'Waimbaji na wanamuziki wakiongoza mkutano katika sifa na ibada kila Sabato.', 'worship', '/assets/img/choir-1200.jpg', 2],
+      ['Family Life Ministries', 'Huduma za Maisha ya Familia', 'Supporting homes and relationships through teaching, counselling and fellowship.', 'Kusaidia nyumba na mahusiano kupitia mafundisho, ushauri na ushirika.', 'women', '/assets/img/women-1200.jpg', 3],
+      ['Prayer Ministry', 'Huduma ya Maombi', 'Gathering for prayer each Wednesday evening and interceding for the church and community.', 'Kukusanyika kwa maombi kila Jumatano jioni na kuiombea kanisa na jamii.', 'prayer', '/assets/img/prayer-1200.jpg', 4],
+      ['Media & Livestream', 'Vyombo vya Habari na Uonyeshaji wa Moja kwa Moja', 'Recording and streaming Sabbath services and sermons so members and visitors can follow online.', 'Kurekodi na kuonyesha moja kwa moja ibada za Sabato na mahubiri ili waumini na wageni wafuatilie mtandaoni.', 'community', '/assets/img/outreach-1200.jpg', 5],
     ];
     rows.forEach((r) => {
       run(
         `INSERT INTO ministries (name_en, name_sw, description_en, description_sw, icon, image, is_active, is_sample, sort_order, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, 1, 1, ?, ?, ?)`,
+         VALUES (?, ?, ?, ?, ?, ?, 1, 0, ?, ?, ?)`,
         [r[0], r[1], r[2], r[3], r[4], r[5], r[6], stamp, stamp]
       );
     });
@@ -362,13 +331,13 @@ function seed() {
 
   if (!get('SELECT id FROM gallery LIMIT 1')) {
     const rows = [
-      ['/assets/img/worship-1200.jpg', 'A congregation worshipping with hands raised', 'Mkutano wakiabudu kwa kuinua mikono', 'Sunday worship', 'Ibada ya Jumapili'],
-      ['/assets/img/choir-1200.jpg', 'A gospel choir singing in the sanctuary', 'Kwaya ya injili ikiimba hekaluni', 'Worship and praise', 'Uimbaji na sifa'],
+      ['/assets/img/worship-1200.jpg', 'A congregation worshipping with hands raised', 'Mkutano wakiabudu kwa kuinua mikono', 'Sabbath worship', 'Ibada ya Sabato'],
+      ['/assets/img/choir-1200.jpg', 'A gospel choir singing in the sanctuary', 'Kwaya ya injili ikiimba hekaluni', 'Music and choir', 'Muziki na kwaya'],
       ['/assets/img/prayer-1200.jpg', 'Hands clasped in prayer over an open Bible', 'Mikono imeshikana katika maombi juu ya Biblia', 'Prayer', 'Maombi'],
-      ['/assets/img/bible-study-1200.jpg', 'A small group studying the Bible together', 'Kikundi kidogo wakijifunza Biblia pamoja', 'Bible study', 'Darasa la Biblia'],
-      ['/assets/img/outreach-1200.jpg', 'Church volunteers serving the community', 'Wajitolea wa kanisa wakihudumia jamii', 'Community outreach', 'Huduma kwa jamii'],
-      ['/assets/img/youth-1200.jpg', 'Young people worshipping together', 'Vijana wakiabudu pamoja', 'Youth fellowship', 'Ushirika wa vijana'],
-      ['/assets/img/women-1200.jpg', 'Women sharing tea and conversation', 'Wanawake wakishiriki chai na mazungumzo', 'Women’s fellowship', 'Ushirika wa wanawake'],
+      ['/assets/img/bible-study-1200.jpg', 'A small group studying the Bible together', 'Kikundi kidogo wakijifunza Biblia pamoja', 'Sabbath School', 'Shule ya Sabato'],
+      ['/assets/img/outreach-1200.jpg', 'Church volunteers serving the community', 'Wajitolea wa kanisa wakihudumia jamii', 'Community service', 'Huduma kwa jamii'],
+      ['/assets/img/youth-1200.jpg', 'Young people worshipping together', 'Vijana wakiabudu pamoja', 'Young people', 'Vijana'],
+      ['/assets/img/women-1200.jpg', 'Women sharing tea and conversation', 'Wanawake wakishiriki chai na mazungumzo', 'Family life', 'Maisha ya familia'],
       ['/assets/img/welcome-1200.jpg', 'Members greeting one another after service', 'Waumini wakisalimiana baada ya ibada', 'Fellowship after service', 'Ushirika baada ya ibada'],
     ];
     rows.forEach((r, i) => {

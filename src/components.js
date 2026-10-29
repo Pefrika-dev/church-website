@@ -245,7 +245,7 @@ function header({ page, locale, tfn, church, announcements = [] }) {
         <a class="brand" href="/" aria-label="${esc(church.name)} — ${esc(tfn('nav.home'))}">
           ${logoMark()}
           <span class="brand__text">
-            <span class="brand__name">${esc(church.name)}</span>
+            <span class="brand__name">${esc(church.shortName || church.name)}</span>
             <span class="brand__sub" data-i18n="brand.tagline">${esc(tfn('brand.tagline'))}</span>
           </span>
         </a>
@@ -273,7 +273,7 @@ function mobileNav({ page, locale, tfn, church }) {
       <div class="mobile-nav__head">
         <a class="brand brand--mobile" href="/" aria-label="${esc(church.name)}">
           ${logoMark()}
-          <span class="brand__text"><span class="brand__name">${esc(church.name)}</span></span>
+          <span class="brand__text"><span class="brand__name">${esc(church.shortName || church.name)}</span></span>
         </a>
         <button type="button" class="icon-btn" data-menu-close aria-label="${esc(tfn('nav.menuClose'))}" data-i18n-aria-label="nav.menuClose">${iconUse('close')}</button>
       </div>
@@ -346,7 +346,7 @@ function footer({ page, locale, tfn, church, serviceTimes, year }) {
             ${serviceTimes.slice(0, 4).map((s) => `<li>
               <span class="footer__service-day" data-i18n="days.${s.day}">${esc(tfn(`days.${s.day}`))}</span>
               <span class="footer__service-name" ${locAttr(s, 'name', locale)}>${esc(loc(s, 'name', locale))}</span>
-              <span class="footer__service-time">${esc(s.start_time)}</span>
+              <span class="footer__service-time">${esc(s.start_time || tfn('common.tba'))}</span>
             </li>`).join('')}
           </ul>
           <a class="footer__link footer__link--arrow" href="/visit">${esc(tfn('info.viewServices'))} ${iconUse('arrow-right')}</a>
@@ -404,7 +404,7 @@ function serviceCard(service, locale, tfn) {
   return `<article class="service-card">
     <div class="service-card__top">
       <span class="service-card__day" data-i18n="days.${service.day}">${esc(tfn(`days.${service.day}`))}</span>
-      <span class="service-card__time">${esc(service.start_time)}</span>
+      <span class="service-card__time">${esc(service.start_time || tfn('common.tba'))}</span>
     </div>
     <h3 class="service-card__name" ${locAttr(service, 'name', locale)}>${esc(loc(service, 'name', locale))}</h3>
     <p class="service-card__text" ${locAttr(service, 'description', locale)}>${esc(loc(service, 'description', locale))}</p>

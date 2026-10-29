@@ -5,6 +5,7 @@ const { pickLocalized } = require('../i18n');
 
 function renderMinistries(ctx) {
   const { t: tfn, ministries } = ctx;
+  const noteKey = ministries.some((m) => m.is_sample) ? 'ministries.sampleNote' : 'ministries.photoNote';
   return `
   ${C.pageHero({
     title: tfn('ministries.pageTitle'),
@@ -19,7 +20,7 @@ function renderMinistries(ctx) {
 
   <section class="section">
     <div class="container">
-      <p class="notice">${C.iconUse('sparkle')}<span data-i18n="ministries.sampleNote">${C.esc(tfn('ministries.sampleNote'))}</span></p>
+      <p class="notice">${C.iconUse('sparkle')}<span data-i18n="${noteKey}">${C.esc(tfn(noteKey))}</span></p>
       <div class="ministry-grid ministry-grid--full">
         ${ministries.map((m) => C.ministryCard(m, ctx.locale, tfn)).join('')}
       </div>
@@ -87,7 +88,7 @@ function renderSermons(ctx) {
         <p data-i18n="sermons.noMatch">${C.esc(tfn('sermons.noMatch'))}</p>
       </div>
       ` : `<div class="empty-state"><span class="empty-state__icon">${C.iconUse('music')}</span><p data-i18n="sermons.empty">${C.esc(tfn('sermons.empty'))}</p></div>`}
-      <p class="note">${C.iconUse('sparkle')}<span data-i18n="sermons.sampleNote">${C.esc(tfn('sermons.sampleNote'))}</span></p>
+      ${sermons.some((s) => s.is_sample) ? `<p class="note">${C.iconUse('sparkle')}<span data-i18n="sermons.sampleNote">${C.esc(tfn('sermons.sampleNote'))}</span></p>` : ''}
     </div>
   </section>`;
 }
@@ -110,13 +111,13 @@ function renderEvents(ctx) {
     <div class="container">
       <div class="section-head-row">
         ${C.sectionHead({ eyebrow: tfn('events.upcoming'), title: tfn('events.allEvents'), text: tfn('events.text') })}
-        <p class="note note--inline">${C.iconUse('clock')}<span data-i18n="events.calendarNote">${C.esc(tfn('events.calendarNote'))}</span></p>
+        ${events.length ? `<p class="note note--inline">${C.iconUse('clock')}<span data-i18n="events.calendarNote">${C.esc(tfn('events.calendarNote'))}</span></p>` : ''}
       </div>
       ${events.length
         ? `<div class="event-list event-list--full">${events.map((e) => C.eventRow(e, locale, tfn)).join('')}</div>`
         : `<div class="empty-state"><span class="empty-state__icon">${C.iconUse('calendar')}</span><p data-i18n="events.empty">${C.esc(tfn('events.empty'))}</p></div>`}
-      <p class="note">${C.iconUse('sparkle')}<span data-i18n="events.sampleNote">${C.esc(tfn('events.sampleNote'))}</span></p>
-      <p class="note">${C.iconUse('file-text')}<span data-i18n="events.registrationNote">${C.esc(tfn('events.registrationNote'))}</span></p>
+      ${events.some((e) => e.is_sample) ? `<p class="note">${C.iconUse('sparkle')}<span data-i18n="events.sampleNote">${C.esc(tfn('events.sampleNote'))}</span></p>` : ''}
+      ${events.length ? `<p class="note">${C.iconUse('file-text')}<span data-i18n="events.registrationNote">${C.esc(tfn('events.registrationNote'))}</span></p>` : ''}
     </div>
   </section>
 

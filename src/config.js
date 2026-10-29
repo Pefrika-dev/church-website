@@ -47,25 +47,27 @@ const config = {
   timezone: 'Africa/Nairobi',
 };
 
-// Placeholders — replace these in the dashboard (Settings → Church profile)
-// or directly in the `settings` table. Nothing here is a claim about a real church.
+// Details verified from the church's public channels (YouTube channel description,
+// Facebook contact info and the Adventist Directory listing). Anything the church
+// has not published — phone number, senior pastor, founding date, giving channels —
+// is intentionally left blank and must be added in the dashboard once confirmed.
 const churchDefaults = {
-  name: 'Your Church Name',
-  shortName: 'Your Church',
-  tagline: 'A place to worship, grow and belong',
-  denomination: '[Denomination]',
-  pastor: '[Senior Pastor’s Name]',
-  location: '[Town / City]',
-  address: '',
+  name: 'Seventh-day Adventist Church Migori Central',
+  shortName: 'SDA Migori Central',
+  tagline: 'Where Christ is exalted, People are Cherished and Truth is Treasured',
+  denomination: 'Seventh-day Adventist',
+  pastor: '',
+  location: 'Migori, Kenya',
+  address: 'Migori–Isebania Road, opposite Migori Teachers’ College, Migori 40400',
   phone: '',
   whatsapp: '',
-  email: '',
-  mapQuery: '',
-  facebook: '',
-  youtube: '',
+  email: 'sdamigoricentral@gmail.com',
+  mapQuery: 'Migori Central SDA Church, Migori, Kenya',
+  facebook: 'https://web.facebook.com/sdamigoricentral',
+  youtube: 'https://www.youtube.com/@sdamigoricentral',
   instagram: '',
   founded: '',
-  serviceNote: '',
+  serviceNote: 'Sabbath (Saturday) is our day of worship.',
 };
 
 const givingDefaults = {

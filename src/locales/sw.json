@@ -1,8 +1,8 @@
 {
   "meta": {
     "home": {
-      "title": "{church} — Mahali pa kuabudu, kukua na kuhusiana",
-      "desc": "Familia ya kanisa inayokaribisha. Ungana nasi kwa ibada ya Jumapili, darasa la Biblia, maombi na maisha ya ushirika. Kila mtu anakaribishwa — njoo kama ulivyo."
+      "title": "{church} — Ibada ya Sabato huko Migori, Kenya",
+      "desc": "Familia ya kanisa la Waadventista Wasabato huko Migori, inayokaribisha. Ungana nasi kwa ibada ya Sabato, Shule ya Sabato, maombi na maisha ya ushirika. Kila mtu anakaribishwa — njoo kama ulivyo."
     },
     "about": {
       "title": "Kuhusu Sisi — {church}",
@@ -18,7 +18,7 @@
     },
     "ministries": {
       "title": "Huduma Zetu — {church}",
-      "desc": "Watoto, vijana, wanawake, wanaume, uimbaji, maombi, huduma ya nje na darasa la Biblia — pata nafasi yako ya kukua na kuhudumu."
+      "desc": "Shule ya Sabato, uimbaji, familia, maombi na huduma ya vyombo vya habari — pata nafasi yako ya kukua na kuhudumu."
     },
     "sermons": {
       "title": "Mahubiri na Mafundisho — {church}",
@@ -42,7 +42,7 @@
     },
     "visit": {
       "title": "Panga Ziara Yako — {church}",
-      "desc": "Nini cha kutarajia Jumapili yako ya kwanza, nyakati za ibada, na jinsi ya kutujulisha unaokuja."
+      "desc": "Nini cha kutarajia Sabato yako ya kwanza, nyakati za ibada, na jinsi ya kutujulisha unaokuja."
     },
     "privacy": {
       "title": "Sera ya Faragha — {church}",
@@ -86,7 +86,7 @@
     "eventsLink": "Tazama yaliyopo"
   },
   "brand": {
-    "tagline": "Mahali pa kuabudu, kukua na kuhusiana"
+    "tagline": "Kristo ametukuzwa · Watu wanathaminiwa · Ukweli unathaminiwa"
   },
   "common": {
     "viewAll": "Tazama zote",
@@ -135,7 +135,7 @@
     "3": "Jumatano",
     "4": "Alhamisi",
     "5": "Ijumaa",
-    "6": "Jumamosi"
+    "6": "Sabato"
   },
   "hero": {
     "eyebrow": "Mahali pa kuabudu, kukua na kuhusiana",
@@ -151,6 +151,8 @@
   },
   "info": {
     "thisSunday": "Jumapili hii",
+    "thisSabbath": "Sabato hii",
+    "thisWeek": "Wiki hii",
     "services": "Nyakati za ibada",
     "location": "Tupate",
     "sampleNote": "Ratiba ya mfano — sasisha kwenye dashibodi.",
@@ -167,19 +169,21 @@
     "pillar1Title": "Ibada",
     "pillar1Body": "Makusanyiko yanayomweka Kristo katikati na kumpa Mungu nafasi.",
     "pillar2Title": "Ushirika",
-    "pillar2Body": "Vikundi vidogo na urafiki unaozidi Jumapili.",
+    "pillar2Body": "Vikundi vidogo na urafiki unaozidi Sabato.",
     "pillar3Title": "Huduma",
     "pillar3Body": "Upendo wa vitendo kwa jamii yetu na zaidi.",
     "quote": "Tungefurahi kukukaribisha ana kwa ana. Njoo uone kile Mungu anachofanya kati yetu.",
     "pastorRole": "Mchungaji Mkuu",
-    "imageNote": "Picha ya kielelezo — ibadilishwe na picha ya mchungaji mkuu.",
-    "imageAlt": "Picha ya mchungaji kanisani"
+    "familyRole": "Familia ya kanisa",
+    "imageNote": "Picha ya kielelezo — ibadilishwe na picha ya waumini.",
+    "imageAlt": "Waumini wakisalimiana"
   },
   "services": {
     "eyebrow": "Ungana nasi wiki hii",
     "title": "Kuna nafasi yako.",
     "text": "Mdundo rahisi wa kila wiki wa ibada, maombi na masomo — njoo kwa mmoja au vyote.",
     "sampleNote": "Hizi ni nyakati za ibada za mfano. Zisasishe kwenye dashibodi ya wafanyakazi kabla ya kuzindua.",
+    "timeNote": "Nyakati za Shule ya Sabato na ibada kuu zinathibitishwa na kanisa. Tafadhali wasiliana nasi kabla ya kusafiri.",
     "directions": "Pata maelekezo",
     "addressPending": "Maelekezo yataonekana mara anwani ya kanisa itakapothibitishwa.",
     "join": "Kila mtu anakaribishwa",
@@ -215,6 +219,7 @@
     "text": "Kuanzia watoto hadi wazee, kuna jumuiya ambapo unaweza kuhusiana na kuchangia.",
     "cta": "Gundua huduma zote",
     "sampleNote": "Huduma hizi za mfano ni vielelezo. Thibitisha programu halisi za kanisa lako kwenye dashibodi.",
+    "photoNote": "Picha ni za kielelezo na zitabadilishwa na picha kutoka kanisani.",
     "pageTitle": "Huduma zetu",
     "pageText": "Huduma ni upendo wenye mikono iliyokunjwa. Gundua mahali Mungu anaweza kuwa anakualika kuhudumu.",
     "involved": "Shiriki",
@@ -255,7 +260,7 @@
     "title": "Nyakati kutoka familia yetu ya kanisa.",
     "text": "Dondoo la ibada, ushirika na huduma.",
     "cta": "Tazama picha",
-    "note": "Picha za kielelezo — badilisha na picha za mkutano wenu.",
+    "note": "Picha za kielelezo — zitabadilishwa na picha za waumini wa Migori Central.",
     "viewImage": "Tazama picha",
     "imageAlt": "Maisha ya kanisa"
   },
@@ -325,14 +330,14 @@
     "privacy": "Tunatumia barua pepe yako kwa matangazo ya kanisa pekee. Tazama sera yetu ya faragha."
   },
   "footer": {
-    "description": "Familia ya kanisa inayokua katika imani, ikihudumia jamii yetu kwa upendo na kumpa kila mtu nafasi.",
+    "description": "Familia ya kanisa la Waadventista Wasabato huko Migori, inayokua katika imani na kuhudumia jamii yetu kwa upendo.",
     "explore": "Gundua",
     "worship": "Abudu nasi",
     "contact": "Tembelea au wasiliana",
     "connect": "Kaa karibu",
     "privacy": "Sera ya faragha",
     "rights": "Haki zote zimehifadhiwa.",
-    "demo": "Tovuti ya onyesho — maudhui ya mfano na taarifa za kanisa lazima zisasishwe kabla ya kuzindua.",
+    "demo": "Tovuti ya onyesho — nyakati za ibada, uongozi na picha vinathibitishwa na kanisa.",
     "notProvided": "Maelezo ya mawasiliano yanakuja hivi karibuni",
     "staff": "Ingia kwa wafanyakazi",
     "followUs": "Tufuate",
@@ -369,11 +374,11 @@
     "social": "Mfuate kanisa",
     "notProvided": "Itachapishwa hivi karibuni",
     "mapTitle": "Ramani inayoonyesha mahali pa kanisa",
-    "responseNote": "Tunalenga kujibu ndani ya siku chache za kazi. Kwa uangalizi wa kichungaji wa haraka, tafadhali piga simu kanisani."
+    "responseNote": "Tunalenga kujibu ndani ya siku chache za kazi. Ikiwa jambo lako ni la haraka, tafadhali zungumza na mjumbe wa kanisa ana kwa ana."
   },
   "visit": {
     "eyebrow": "Panga ziara yako",
-    "title": "Jumapili yako ya kwanza, kwa urahisi.",
+    "title": "Sabato yako ya kwanza, kwa urahisi.",
     "text": "Huhitaji kuvaa namna fulani au kumjua mtu yeyote. Njoo kama ulivyo — tutakusubiri.",
     "pageTitle": "Panga ziara yako",
     "pageText": "Tueleze kidogo kuhusu ziara yako na tutakusaidia kupata njia. Hakuna shinikizo wala matarajio zaidi ya ukaribishaji wa joto.",
@@ -383,9 +388,9 @@
     "step2Title": "Abudu pamoja",
     "step2Body": "Ibada zetu zinajumuisha nyimbo, maombi, kusoma Maandiko na mahubiri. Unakaribishwa kushiriki kwa kasi yako.",
     "step3Title": "Watoto wanatunzwa",
-    "step3Body": "Huduma ya watoto huendeshwa wakati wa ibada za Jumapili, ikiwa na mafundisho yanayofaa rika na mahali salama panaposimamiwa.",
+    "step3Body": "Watoto wanakaribishwa. Tujulishe umri wao kwenye fomu ili tuweze kukusaidia kupanga.",
     "step4Title": "Baki kwa muda",
-    "step4Body": "Baada ya ibada, ungana nasi kwa vitafunio na mazungumzo. Hakuna atakayekushinikiza kujiandikisha kwa kitu chochote.",
+    "step4Body": "Baada ya ibada, unakaribishwa kubaki na kuzungumza nasi. Hakuna atakayekushinikiza kujiandikisha kwa kitu chochote.",
     "formTitle": "Tujulishe unaokuja",
     "formText": "Hii ni hiari, lakini hutusaidia kuandaa ukaribishaji mzuri. Tutatumia maelezo yako kusaidia ziara yako pekee.",
     "serviceLabel": "Ungependa kuhudhuria ibada gani?",
@@ -397,16 +402,16 @@
     "success": "Asante. Tuna maelezo ya ziara yako na tunatarajia kukukaribisha.",
     "faqTitle": "Maswali ya mara ya kwanza",
     "faq1Q": "Nivae nini?",
-    "faq1A": "Vaa kile unachojisikia vizuri. Utakutana na watu katika suti rasmi hadi mavazi ya kawaida. Hakuna kanuni za mavazi.",
+    "faq1A": "Vaa kile unachojisikia vizuri. Hakuna kanuni za mavazi.",
     "faq2Q": "Kuna maegesho?",
-    "faq2A": "Mipango ya maegesho itathibitishwa pamoja na anwani ya kanisa. Ikiwa una mahitaji ya ufikiaji, tueleze kwenye fomu na tutakusaidia.",
+    "faq2A": "Mipango ya maegesho itathibitishwa na kanisa. Ikiwa una mahitaji ya ufikiaji, tueleze kwenye fomu na tutakusaidia.",
     "faq3Q": "Ibada hudumu muda gani?",
-    "faq3A": "Ibada za Jumapili kwa kawaida hudumu kama dakika 90, ikijumuisha sifa na mafundisho.",
+    "faq3A": "Programu ya Sabato inajumuisha Shule ya Sabato na ibada kuu. Tuulize ikiwa unahitaji msaada wa kupanga asubuhi yako.",
     "faq4Q": "Nitaombwa pesa?",
     "faq4A": "Kuna nafasi ya kutoa wakati wa ibada, lakini kutoa ni kwa hiari kabisa. Wageni hawatakiwi kuchangia kamwe.",
     "faq5Q": "Naweza kuja na watoto wangu?",
-    "faq5A": "Ndiyo. Watoto wanakaribishwa kwenye ibada na katika huduma yetu ya watoto. Tujulishe umri wao kwenye fomu ili tuweze kusaidia.",
-    "sampleNote": "Nyakati za ibada zinaonyeshwa ni za mfano. Zithibitishe na kanisa kabla ya ziara yako."
+    "faq5A": "Ndiyo. Watoto wanakaribishwa kwenye ibada. Tujulishe umri wao kwenye fomu ili tuweze kusaidia.",
+    "sampleNote": "Nyakati za Sabato zinathibitishwa na kanisa. Tafadhali wasiliana nasi kabla ya kusafiri."
   },
   "about": {
     "eyebrow": "Kuhusu sisi",
@@ -414,7 +419,7 @@
     "text": "Familia ya kanisa tunayojifunza kumpenda Mungu, kupendana na kuhudumia jamii yetu.",
     "storyEyebrow": "Historia yetu",
     "storyTitle": "Jumuiya iliyoundwa na neema.",
-    "storyBody1": "Kila kanisa lina hadithi ya uvumilivu na neema ya Mungu. Letu bado linaandikwa — katika ibada ya Jumapili, katika vikundi vidogo, katika maombi ya utulivu na katika uaminifu wa kila siku wa watu wa kawaida.",
+    "storyBody1": "Kila kanisa lina hadithi ya uvumilivu na neema ya Mungu. Letu bado linaandikwa — katika ibada ya Sabato, katika maombi na katika uaminifu wa kila siku wa watu wa kawaida.",
     "storyBody2": "Historia yetu kamili, ikiwemo kuanzishwa na hatua muhimu, itachapishwa hapa mara itakapothibitishwa na uongozi wa kanisa.",
     "storyNote": "Tarehe ya kuanzishwa na historia ni vielelezo.",
     "visionTitle": "Maono yetu",
@@ -424,8 +429,8 @@
     "missionText": "Kufanya wanafunzi kupitia ibada, mafundisho, maombi na huduma ya vitendo, na kumkaribisha kila mtu kwa ukarimu wa Kristo.",
     "missionNote": "Taarifa ya rasimu — inasubiri uthibitisho kutoka uongozi wa kanisa.",
     "beliefsEyebrow": "Tunaamini nini",
-    "beliefsTitle": "Imani ya kihistoria, iliyoshikiliwa kwa unyenyekevu.",
-    "beliefsText": "Tunakubali imani za kihistoria za Kikristo. Muhtasari mfupi hapa chini ni wa jumla na hauchukui nafasi ya taarifa kamili ya imani ya kanisa, ambayo itachapishwa baada ya kupitishwa na uongozi.",
+    "beliefsTitle": "Tumejikita katika Maandiko.",
+    "beliefsText": "Sisi ni mkutano wa Waadventista Wasabato. Tunashika Sabato ya siku ya saba na tunaishi kwa tumaini la kurudi kwa Kristo. Muhtasari hapa chini ni wa jumla na hauchukui nafasi ya taarifa kamili ya imani ya kanisa, ambayo itachapishwa baada ya kupitishwa na uongozi.",
     "belief1Title": "Maandiko",
     "belief1Body": "Biblia ni Neno la Mungu lililopuliziwa na ni mwongozo wetu wa kuaminika kwa imani na maisha.",
     "belief2Title": "Utatu",
@@ -444,7 +449,7 @@
     "leadershipText": "Kanisa letu linahudumiwa na wachungaji, wazee na viongozi wa huduma wanaowatunza waumini na kuwajenga wengine kwa huduma.",
     "leadershipCta": "Kutana na uongozi wetu",
     "ctaTitle": "Kuna nafasi yako hapa.",
-    "ctaText": "Njoo uone. Tungefurahi kukukaribisha ana kwa ana Jumapili hii.",
+    "ctaText": "Njoo uone. Tungefurahi kukukaribisha ana kwa ana Sabato hii.",
     "ctaVisit": "Panga ziara yako",
     "ctaContact": "Wasiliana nasi",
     "imageAlt": "Waumini wa kanisa wakisalimiana baada ya ibada",

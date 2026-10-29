@@ -4,13 +4,18 @@ const C = require('../components');
 const { formatDate, pickLocalized } = require('../i18n');
 
 function heroCard(services, church, tfn, locale) {
-  const sunday = services.filter((s) => Number(s.day) === 0).slice(0, 2);
-  const times = sunday.length ? sunday.map((s) => s.start_time).join(' · ') : tfn('common.tba');
+  const sunday = services.filter((s) => Number(s.day) === 0);
+  const sabbath = services.filter((s) => Number(s.day) === 6);
+  const featured = (sunday.length ? sunday : sabbath.length ? sabbath : services).slice(0, 2);
+  const labelKey = sunday.length ? 'info.thisSunday' : sabbath.length ? 'info.thisSabbath' : 'info.thisWeek';
+  const times = featured.length
+    ? [...new Set(featured.map((s) => s.start_time || tfn('common.tba')))].join(' · ')
+    : tfn('common.tba');
   const location = church.location && !church.location.startsWith('[')
     ? church.location
     : tfn('info.addressPending');
-  return `<aside class="hero-card" aria-label="${C.esc(tfn('info.thisSunday'))}">
-    <p class="hero-card__eyebrow"><span class="dot" aria-hidden="true"></span>${C.esc(tfn('info.thisSunday'))}</p>
+  return `<aside class="hero-card" aria-label="${C.esc(tfn(labelKey))}">
+    <p class="hero-card__eyebrow"><span class="dot" aria-hidden="true"></span>${C.esc(tfn(labelKey))}</p>
     <p class="hero-card__time">${C.esc(times)}</p>
     <p class="hero-card__label">${C.esc(tfn('info.services'))}</p>
     <div class="hero-card__rule"></div>
@@ -27,7 +32,15 @@ function renderHome(ctx) {
     return (withImages.length >= 4 ? withImages : ministries).slice(0, 4);
   })();
   const galleryItems = gallery.slice(0, 6);
-  const sundayServices = services.filter((s) => Number(s.day) === 0);
+  const pendingServiceTimes = services.some((s) => !s.start_time);
+  const hasSampleServices = services.some((s) => s.is_sample);
+  const hasSampleSermons = sermons.some((s) => s.is_sample);
+  const hasSampleMinistries = ministries.some((m) => m.is_sample);
+  const hasSampleEvents = events.some((e) => e.is_sample);
+  const hasPastor = Boolean(church.pastor && !church.pastor.startsWith('['));
+  const quoteName = hasPastor ? church.pastor : church.shortName || church.name;
+  const quoteRoleKey = hasPastor ? 'welcome.pastorRole' : 'welcome.familyRole';
+  const quoteRole = tfn(quoteRoleKey);
   const mapQuery = church.mapQuery || church.address;
   const directionsHref = mapQuery
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`
@@ -63,7 +76,7 @@ function renderHome(ctx) {
       <div class="welcome__visual reveal">
         <figure class="media-frame">
           ${C.picture('welcome', { alt: tfn('about.imageAlt'), sizes: '(min-width: 1000px) 46vw, 100vw', className: 'media-frame__img' })}
-          <figcaption class="media-caption">${C.esc(tfn('gallery.note'))}</figcaption>
+          <figcaption class="media-caption">${C.esc(tfn('welcome.imageNote'))}</figcaption>
         </figure>
         <div class="welcome__seal" aria-hidden="true">
           <span class="welcome__seal-ring"></span>
@@ -98,14 +111,14 @@ function renderHome(ctx) {
     <div class="container">
       <figure class="pastor-quote reveal">
         <div class="pastor-quote__photo">
-          ${C.picture('pastor', { alt: tfn('welcome.imageAlt'), sizes: '120px', className: 'pastor-quote__img' })}
+          ${C.picture('welcome', { alt: tfn('welcome.imageAlt'), sizes: '120px', className: 'pastor-quote__img' })}
         </div>
         <blockquote class="pastor-quote__body">
           <span class="quote-glyph" aria-hidden="true">${C.iconUse('quote')}</span>
           <p data-i18n="welcome.quote">${C.esc(tfn('welcome.quote'))}</p>
           <footer>
-            <span class="pastor-quote__name">${C.esc(church.pastor)}</span>
-            <span class="pastor-quote__role" data-i18n="welcome.pastorRole">${C.esc(tfn('welcome.pastorRole'))}</span>
+            <span class="pastor-quote__name">${C.esc(quoteName)}</span>
+            <span class="pastor-quote__role" data-i18n="${quoteRoleKey}">${C.esc(quoteRole)}</span>
             <span class="pastor-quote__note" data-i18n="welcome.imageNote">${C.esc(tfn('welcome.imageNote'))}</span>
           </footer>
         </blockquote>
@@ -123,7 +136,11 @@ function renderHome(ctx) {
         ${services.map((s) => C.serviceCard(s, locale, tfn)).join('')}
       </div>
       <div class="services__foot">
-        <p class="note note--onDark">${C.iconUse('sparkle')}<span data-i18n="services.sampleNote">${C.esc(tfn('services.sampleNote'))}</span></p>
+        ${pendingServiceTimes
+          ? `<p class="note note--onDark">${C.iconUse('sparkle')}<span data-i18n="services.timeNote">${C.esc(tfn('services.timeNote'))}</span></p>`
+          : hasSampleServices
+          ? `<p class="note note--onDark">${C.iconUse('sparkle')}<span data-i18n="services.sampleNote">${C.esc(tfn('services.sampleNote'))}</span></p>`
+          : ''}
         ${directionsHref
           ? `<a class="link-arrow link-arrow--light" href="${C.esc(directionsHref)}" target="_blank" rel="noopener noreferrer">${C.iconUse('map-pin')}${C.esc(tfn('services.directions'))}</a>`
           : `<span class="note note--onDark">${C.iconUse('map-pin')}${C.esc(tfn('services.addressPending'))}</span>`}
@@ -140,7 +157,7 @@ function renderHome(ctx) {
       <div class="sermon-grid">
         ${sermons.map((s) => C.sermonCard(s, locale, tfn)).join('')}
       </div>
-      <p class="note">${C.iconUse('sparkle')}<span data-i18n="sermons.sampleNote">${C.esc(tfn('sermons.sampleNote'))}</span></p>
+      ${hasSampleSermons ? `<p class="note">${C.iconUse('sparkle')}<span data-i18n="sermons.sampleNote">${C.esc(tfn('sermons.sampleNote'))}</span></p>` : ''}
     </div>
   </section>
 
@@ -183,7 +200,7 @@ function renderHome(ctx) {
       <div class="ministry-grid">
         ${featuredMinistries.map((m) => C.ministryCard(m, locale, tfn)).join('')}
       </div>
-      <p class="note">${C.iconUse('sparkle')}<span data-i18n="ministries.sampleNote">${C.esc(tfn('ministries.sampleNote'))}</span></p>
+      <p class="note">${C.iconUse('sparkle')}<span data-i18n="${hasSampleMinistries ? 'ministries.sampleNote' : 'ministries.photoNote'}">${C.esc(tfn(hasSampleMinistries ? 'ministries.sampleNote' : 'ministries.photoNote'))}</span></p>
     </div>
   </section>
 
@@ -196,7 +213,7 @@ function renderHome(ctx) {
       ${events.length
         ? `<div class="event-list">${events.map((e) => C.eventRow(e, locale, tfn)).join('')}</div>`
         : `<div class="empty-state"><span class="empty-state__icon">${C.iconUse('calendar')}</span><p data-i18n="events.empty">${C.esc(tfn('events.empty'))}</p></div>`}
-      <p class="note">${C.iconUse('sparkle')}<span data-i18n="events.sampleNote">${C.esc(tfn('events.sampleNote'))}</span></p>
+      ${hasSampleEvents ? `<p class="note">${C.iconUse('sparkle')}<span data-i18n="events.sampleNote">${C.esc(tfn('events.sampleNote'))}</span></p>` : ''}
     </div>
   </section>
 

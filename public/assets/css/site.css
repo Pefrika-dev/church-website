@@ -782,9 +782,11 @@ ol {
 
 .nav-link {
   position: relative;
+  flex: none;
   padding: 0.55rem 0.35rem;
   font-size: 0.88rem;
   font-weight: 600;
+  white-space: nowrap;
   color: var(--ink-soft);
   transition: color 0.2s var(--ease);
 }
@@ -3252,6 +3254,56 @@ ol {
 
 .select-field--full select {
   width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.6rem 0 2rem;
+}
+
+.toolbar .search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 280px;
+  gap: 0.55rem;
+  padding: 0 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.toolbar .search-field:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 22%, transparent);
+}
+
+.toolbar .search-field > .icon {
+  flex: none;
+  color: var(--ink-faint);
+}
+
+.toolbar .search-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.8rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.toolbar .search-field input:focus {
+  outline: none;
+}
+
+.toolbar .select-field {
+  flex: 0 1 210px;
+  min-width: 170px;
 }
 
 /* --------------------------------------------------------------------------

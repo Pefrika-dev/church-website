@@ -1,8 +1,8 @@
 {
   "meta": {
     "home": {
-      "title": "{church} — A place to worship, grow and belong",
-      "desc": "A welcoming church family. Join us for Sunday worship, Bible study, prayer and community life. Everyone is welcome — come as you are."
+      "title": "{church} — Sabbath worship in Migori, Kenya",
+      "desc": "A welcoming Seventh-day Adventist church family in Migori. Join us for Sabbath worship, Sabbath School, prayer and community life. Everyone is welcome — come as you are."
     },
     "about": {
       "title": "About Us — {church}",
@@ -18,7 +18,7 @@
     },
     "ministries": {
       "title": "Our Ministries — {church}",
-      "desc": "Children, youth, women, men, worship, prayer, outreach and Bible study — find your place to grow and serve."
+      "desc": "Sabbath School, music, family life, prayer and media ministry — find your place to grow and serve."
     },
     "sermons": {
       "title": "Sermons & Teaching — {church}",
@@ -42,7 +42,7 @@
     },
     "visit": {
       "title": "Plan Your Visit — {church}",
-      "desc": "What to expect on your first Sunday, service times, and how to let us know you are coming."
+      "desc": "What to expect on your first Sabbath, service times, and how to let us know you are coming."
     },
     "privacy": {
       "title": "Privacy Policy — {church}",
@@ -86,7 +86,7 @@
     "eventsLink": "See what’s on"
   },
   "brand": {
-    "tagline": "A place to worship, grow and belong"
+    "tagline": "Christ exalted · People cherished · Truth treasured"
   },
   "common": {
     "viewAll": "View all",
@@ -135,7 +135,7 @@
     "3": "Wednesday",
     "4": "Thursday",
     "5": "Friday",
-    "6": "Saturday"
+    "6": "Sabbath"
   },
   "hero": {
     "eyebrow": "A place to worship, grow and belong",
@@ -151,6 +151,8 @@
   },
   "info": {
     "thisSunday": "This Sunday",
+    "thisSabbath": "This Sabbath",
+    "thisWeek": "This week",
     "services": "Service times",
     "location": "Find us",
     "sampleNote": "Sample schedule — update in the dashboard.",
@@ -167,19 +169,21 @@
     "pillar1Title": "Worship",
     "pillar1Body": "Christ-centred gatherings that make room for God.",
     "pillar2Title": "Community",
-    "pillar2Body": "Small groups and friendships that go beyond Sunday.",
+    "pillar2Body": "Small groups and friendships that go beyond Sabbath.",
     "pillar3Title": "Service",
     "pillar3Body": "Practical love for our neighbourhood and beyond.",
     "quote": "It would be our joy to welcome you in person. Come and see what God is doing among us.",
     "pastorRole": "Senior Pastor",
-    "imageNote": "Illustrative image — replace with a photo of the senior pastor.",
-    "imageAlt": "Portrait of a pastor in his church"
+    "familyRole": "Church family",
+    "imageNote": "Illustrative image — replace with a photograph of the congregation.",
+    "imageAlt": "Members of the congregation greeting one another"
   },
   "services": {
     "eyebrow": "Join us this week",
     "title": "There is a seat for you.",
     "text": "Simple weekly rhythms of worship, prayer and study — come to one or come to all.",
     "sampleNote": "These are sample service times. Update them in the staff dashboard before launch.",
+    "timeNote": "Sabbath School and divine service times are being confirmed with the church. Please contact us before travelling.",
     "directions": "Get directions",
     "addressPending": "Directions will appear once the church address is confirmed.",
     "join": "Everyone is welcome",
@@ -215,6 +219,7 @@
     "text": "From children to elders, there is a community where you can belong and contribute.",
     "cta": "Explore all ministries",
     "sampleNote": "These ministry examples are placeholders. Confirm your church’s actual programmes in the dashboard.",
+    "photoNote": "Photographs are illustrative and will be replaced with photographs from the church.",
     "pageTitle": "Our ministries",
     "pageText": "Ministry is simply love with sleeves rolled up. Explore where God might be inviting you to serve.",
     "involved": "Get involved",
@@ -255,7 +260,7 @@
     "title": "Moments from our church family.",
     "text": "A glimpse of worship, fellowship and service.",
     "cta": "View gallery",
-    "note": "Illustrative images — replace with photos of your own congregation.",
+    "note": "Illustrative photographs — to be replaced with photographs of the Migori Central congregation.",
     "viewImage": "View image",
     "imageAlt": "Church life"
   },
@@ -325,14 +330,14 @@
     "privacy": "We use your email only for church announcements. See our privacy policy."
   },
   "footer": {
-    "description": "A church family growing in faith, serving our community with love, and making room for everyone.",
+    "description": "A Seventh-day Adventist church family in Migori, growing in faith and serving our community with love.",
     "explore": "Explore",
     "worship": "Worship with us",
     "contact": "Visit or contact",
     "connect": "Stay connected",
     "privacy": "Privacy policy",
     "rights": "All rights reserved.",
-    "demo": "Preview site — sample content and church details must be updated before launch.",
+    "demo": "Preview site — service times, leadership and photographs are being confirmed with the church.",
     "notProvided": "Contact details coming soon",
     "staff": "Staff login",
     "followUs": "Follow us",
@@ -369,11 +374,11 @@
     "social": "Follow the church",
     "notProvided": "To be published soon",
     "mapTitle": "Map showing the church location",
-    "responseNote": "We aim to reply within a few working days. For urgent pastoral care, please call the church."
+    "responseNote": "We aim to reply within a few working days. If your matter is urgent, please speak with a member of the church in person."
   },
   "visit": {
     "eyebrow": "Plan your visit",
-    "title": "Your first Sunday, made simple.",
+    "title": "Your first Sabbath, made simple.",
     "text": "You do not need to dress a certain way or know anyone. Come as you are — we will look out for you.",
     "pageTitle": "Plan your visit",
     "pageText": "Tell us a little about your visit and we will help you find your way. There is no pressure and no expectation beyond a warm welcome.",
@@ -383,9 +388,9 @@
     "step2Title": "Worship together",
     "step2Body": "Our services include singing, prayer, Scripture reading and a sermon. You are welcome to participate at your own pace.",
     "step3Title": "Children are cared for",
-    "step3Body": "Children’s ministry runs during the Sunday services, with age-appropriate teaching and a safe, supervised space.",
+    "step3Body": "Children are welcome. Tell us their ages in the form so we can help you plan.",
     "step4Title": "Stay for a while",
-    "step4Body": "After the service, join us for refreshments and conversation. No one will pressure you to sign up for anything.",
+    "step4Body": "After the service, you are welcome to stay and talk with us. No one will pressure you to sign up for anything.",
     "formTitle": "Let us know you’re coming",
     "formText": "This is optional, but it helps us prepare a warm welcome. We will only use your details to help with your visit.",
     "serviceLabel": "Which service would you like to attend?",
@@ -397,16 +402,16 @@
     "success": "Thank you. We have your visit details and look forward to welcoming you.",
     "faqTitle": "First-time questions",
     "faq1Q": "What should I wear?",
-    "faq1A": "Come in what you are comfortable wearing. You will find people in everything from smart suits to casual clothes. There is no dress code.",
+    "faq1A": "Come in what you are comfortable wearing. There is no dress code.",
     "faq2Q": "Is there parking?",
-    "faq2A": "Parking arrangements will be confirmed with the church’s address. If you have accessibility needs, tell us in the form and we will help.",
+    "faq2A": "Parking arrangements will be confirmed by the church. If you have accessibility needs, tell us in the form and we will help.",
     "faq3Q": "How long is a service?",
-    "faq3A": "Sunday services usually last about 90 minutes, including worship and teaching.",
+    "faq3A": "Our Sabbath programme includes Sabbath School and the divine service. Ask us if you need help planning your morning.",
     "faq4Q": "Will I be asked for money?",
     "faq4A": "There is an opportunity to give during the service, but giving is entirely voluntary. Visitors are never expected to contribute.",
     "faq5Q": "Can I bring my children?",
-    "faq5A": "Yes. Children are welcome in the service and in our children’s ministry. Let us know their ages in the form so we can help.",
-    "sampleNote": "Service times shown are samples. Confirm them with the church before your visit."
+    "faq5A": "Yes. Children are welcome in the service. Let us know their ages in the form so we can help.",
+    "sampleNote": "Sabbath times are being confirmed with the church. Please contact us before travelling."
   },
   "about": {
     "eyebrow": "About us",
@@ -414,7 +419,7 @@
     "text": "A church family learning to love God, love one another and serve our neighbourhood.",
     "storyEyebrow": "Our story",
     "storyTitle": "A community shaped by grace.",
-    "storyBody1": "Every church has a story of God’s patience and grace. Ours is still being written — in Sunday worship, in small groups, in quiet prayer and in the everyday faithfulness of ordinary people.",
+    "storyBody1": "Every church has a story of God’s patience and grace. Ours is still being written — in Sabbath worship, in prayer and in the everyday faithfulness of ordinary people.",
     "storyBody2": "Our full history, including our founding and milestones, will be published here once it has been confirmed by church leadership.",
     "storyNote": "Founding date and history are placeholders.",
     "visionTitle": "Our vision",
@@ -424,8 +429,8 @@
     "missionText": "To make disciples through worship, teaching, prayer and practical service, and to welcome every person with the hospitality of Christ.",
     "missionNote": "Draft statement — awaiting confirmation from church leadership.",
     "beliefsEyebrow": "What we believe",
-    "beliefsTitle": "The historic faith, held with humility.",
-    "beliefsText": "We affirm the historic Christian creeds. The brief summaries below are general and do not replace the church’s full statement of faith, which will be published once approved by leadership.",
+    "beliefsTitle": "Anchored in Scripture.",
+    "beliefsText": "We are a Seventh-day Adventist congregation. We keep the seventh-day Sabbath and live in the hope of Christ’s return. The summaries below are general and do not replace the church’s full statement of faith, which will be published once approved by leadership.",
     "belief1Title": "Scripture",
     "belief1Body": "The Bible is God’s inspired Word and our trustworthy guide for faith and life.",
     "belief2Title": "The Trinity",
@@ -444,7 +449,7 @@
     "leadershipText": "Our church is served by pastors, elders and ministry leaders who care for the congregation and equip others for service.",
     "leadershipCta": "Meet our leadership",
     "ctaTitle": "There is a place for you here.",
-    "ctaText": "Come and see. We would love to welcome you in person this Sunday.",
+    "ctaText": "Come and see. We would love to welcome you in person this Sabbath.",
     "ctaVisit": "Plan your visit",
     "ctaContact": "Contact us",
     "imageAlt": "Church members greeting one another after a service",

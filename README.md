@@ -1,6 +1,6 @@
-# Church Website — English & Kiswahili with Staff Dashboard
+# SDA Migori Central — English & Kiswahili Church Website
 
-A server-rendered church website with a secure content dashboard, built with Node.js, Express 5, plain HTML/CSS/JavaScript and the SQLite engine that ships with Node (`node:sqlite`). No frontend framework, no external database, no third-party trackers, no runtime build step.
+A server-rendered church website for **Seventh-day Adventist Church Migori Central** with a secure staff dashboard, built with Node.js, Express 5, plain HTML/CSS/JavaScript and the SQLite engine that ships with Node (`node:sqlite`). No frontend framework, no external database, no third-party trackers, no runtime build step.
 
 ---
 
@@ -41,7 +41,7 @@ Global features on every page:
   - **Administrator** — full access.
   - **Editor** — content create/update, inbox viewing and status changes; no deletes, settings, users, subscribers or audit log.
 - Modules:
-  - **Overview** — counters, sample-content notice, latest prayer requests and messages.
+  - **Overview** — counters, a notice when illustrative rows remain, latest prayer requests and messages.
   - **Content** — announcements, service times, sermons (with video/audio URL fields), events, ministries, gallery.
   - **Messages** — prayer requests, visit requests, contact messages with status workflow and detail view.
   - **Subscribers** — newsletter list with CSV export.
@@ -53,17 +53,36 @@ Global features on every page:
 
 ---
 
-## 2. Content authenticity
+## 2. Content authenticity — this deployment
 
-The brief required that no real church details, money details, testimonies, media or statistics be invented. The implementation follows this:
+The site is populated only from the church's **public channels** (its Facebook page, YouTube channel and Adventist directory listing). Nothing was invented. Fields the church has not published remain empty and are rendered as honest "to be announced" states:
 
-- **Church identity is a placeholder** (`Your Church Name`, `[Town / City]`, `[Senior Pastor’s Name]`, …). Every field is editable in **Dashboard → Settings → Church profile**. Nothing in the code claims to be a real church.
-- **Sample rows** for announcements, service times, sermons, events, ministries and gallery are flagged `is_sample = 1`. The dashboard shows a banner while sample content exists, and the announcement bar displays a "Sample" badge.
-- **Giving details are empty by default.** No Paybill, Till number, bank account or transaction reference exists anywhere in the project. A method appears on `/give` only after an administrator saves it and ticks **Verified**. No payment credentials are stored in frontend code.
-- **No testimonies are fabricated.** The home page publishes a consent statement and a "Share your story" link instead. No names or quotes are attributed to anyone.
-- **No videos or listening statistics are faked.** Sermon cards link out only to URLs entered in the dashboard.
-- **Prayer requests are private.** They are visible only to signed-in staff and are never rendered on public pages.
-- **Images are illustrative**, generated for this preview and marked as such in the footer. Replace them with real photos of the congregation before launch.
+| Verified and published | Source |
+| --- | --- |
+| Name: Seventh-day Adventist Church Migori Central | Church Facebook/YouTube |
+| Motto: "Where Christ is exalted, People are Cherished and Truth is Treasured" | Church Facebook page |
+| Denomination, location and address (Migori–Isebania Road, opposite Migori Teachers' College, Migori 40400) | Adventist directory listing |
+| Email `sdamigoricentral@gmail.com`; Facebook and YouTube links | Public listings / channel |
+| Wednesday prayer service, 17:30 | Public church listing |
+| Six recent sermons with title, speaker, date, Scripture (where shown) and YouTube link | Church YouTube channel |
+| Ministries named in public announcements (Sabbath School, music, family life, prayer, media) | Church posts and streams |
+
+**Not published anywhere yet — deliberately left blank:**
+
+- Sabbath School and Divine Service **start times** (shown as "To be announced" with an explanatory note).
+- Phone, WhatsApp, senior pastor and leadership names, founding year, vision/mission statements (leadership page and about page say the content is pending).
+- Giving channels — `/give` shows only the "being finalised" state; no Paybill, Till, bank account or transaction reference exists in the project.
+- Upcoming events — the events table starts empty; the page shows its empty state.
+- Real congregation photographs — the gallery uses illustrative images and says so.
+- Testimonies — none are published.
+
+Rules that remain in force:
+
+- Every church field is editable in **Dashboard → Settings → Church profile**. Empty fields are hidden rather than rendered as dead links.
+- Giving methods appear only after an administrator saves them and ticks **Verified**.
+- Sermon cards link only to URLs entered in the dashboard; no statistics are fabricated.
+- Prayer requests are private and never rendered on public pages.
+- No payment credentials are stored in frontend code or committed to the repository.
 
 ---
 
@@ -102,7 +121,7 @@ npm start       # normal start
 - Website: <http://localhost:3000>
 - Dashboard: <http://localhost:3000/admin>
 
-On first start the database is created at `data/church.sqlite`, the schema is applied, the administrator account is created from `.env`, and clearly-labelled sample content is seeded. Sign in and replace the sample content, or delete it.
+On first start the database is created at `data/church.sqlite`, the schema is applied, the administrator account is created from `.env`, and the church profile plus the verified public content (announcements, service rows, sermons, ministries, gallery) are seeded. Sign in to complete the fields the church still needs to confirm.
 
 > The administrator is created **once**, on first start, only if the `users` table is empty. Changing `ADMIN_PASSWORD` later does not overwrite the stored password — use **My account** in the dashboard.
 
@@ -188,8 +207,9 @@ WantedBy=multi-user.target
 ### 7.4 After the first deploy
 
 - Sign in at `/admin` and **change the administrator password** (My account).
-- Replace every placeholder in Settings → Church profile, including phone, WhatsApp, email, map query and social links. Empty fields are hidden rather than rendered as dead links.
-- Add real service times, events, sermons, ministries and photos; delete sample rows.
+- Confirm the church profile in Settings → Church profile (address, email and social links are pre-filled; add phone, WhatsApp and pastor when confirmed).
+- Add the Sabbath School and Divine Service start times, then remove the "being confirmed" notes by clearing the blank rows.
+- Add real events, ministry photos and congregation photos; replace the illustrative gallery images.
 - Add giving methods only after the church confirms them, and tick **Verified**.
 - Review the privacy policy wording with the church.
 - Confirm `SITE_URL`, `robots.txt` and `sitemap.xml` use the real domain, and that `/admin` responds with `X-Robots-Tag: noindex`.
@@ -198,22 +218,20 @@ Health check: `GET /healthz` returns `{"ok":true}` when the database is reachabl
 
 ---
 
-## 8. Information needed from the church before launch
+## 8. Information still needed from the church
 
-The site is deliberately free of invented facts. To go live, collect:
+The site is deliberately free of unverified facts. To complete it, collect and confirm:
 
-1. **Identity** — official church name, short name, tagline, denomination, year founded.
-2. **Contact** — physical address, town/city, map location/query, phone, WhatsApp number in international format, public email.
-3. **Services** — days, start times, duration and short descriptions in English and Kiswahili.
-4. **Leadership** — names, roles, short biographies, photos and consent to publish.
-5. **Sermons/media** — titles, speakers, dates, scripture, descriptions, and only real YouTube/audio links the church owns or is allowed to embed.
-6. **Events** — dates, times, venues, descriptions, posters.
-7. **Ministries** — names, descriptions, meeting times, contact person (if public).
-8. **Giving** — verified M-Pesa Paybill/Till or bank details, exact account names, and official guidance text. Enter these in the dashboard only; never commit them to code.
-9. **Social links** — official Facebook, YouTube, Instagram URLs.
-10. **Photos** — real congregation/building photos with permission, replacing the illustrative images.
-11. **Testimonies** — written consent from each person before publishing anything.
-12. **Domain and email** — production domain for `SITE_URL`, and a mailbox to receive enquiries (see limitations).
+1. **Sabbath times** — Sabbath School and Divine Service start times, duration and any second service.
+2. **Contact** — phone and WhatsApp number in international format; confirm the postal address and map pin.
+3. **Leadership** — senior pastor, elders and ministry leaders: names, correct titles, short biographies, photos and consent to publish.
+4. **History and statements** — year founded, milestones, and approved vision, mission and full statement of faith.
+5. **Events** — dates, times, venues, descriptions and posters.
+6. **Giving** — verified M-Pesa Paybill/Till or bank details, exact account names and official guidance. Enter these in the dashboard only; never commit them to code.
+7. **Photos** — real congregation and building photos with permission, replacing the illustrative images.
+8. **Testimonies** — written consent from each person before publishing anything.
+9. **Social links** — confirm Facebook/YouTube and add Instagram or TikTok if the church uses them.
+10. **Domain and email** — production domain for `SITE_URL`, and a mailbox to receive enquiries (see limitations).
 
 ---
 
