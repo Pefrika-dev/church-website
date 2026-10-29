@@ -90,7 +90,7 @@ Rules that remain in force:
 
 ## 3. Requirements
 
-- **Node.js 22.5 or newer** (needed for `node:sqlite`). Tested on Node 24.
+- **Node.js 24 LTS** (needed for the unflagged `node:sqlite` module; Node 22 requires `--experimental-sqlite`).
 - npm 10+.
 - No external database or service is required.
 
@@ -217,6 +217,35 @@ WantedBy=multi-user.target
 - Confirm `SITE_URL`, `robots.txt` and `sitemap.xml` use the real domain, and that `/admin` responds with `X-Robots-Tag: noindex`.
 
 Health check: `GET /healthz` returns `{"ok":true}` when the database is reachable.
+
+### 7.5 Vercel demo (evaluation only)
+
+The repository ships a Vercel entry point (`api/index.js`), a rewrite to it in `vercel.json`, and `includeFiles` for `public/` and `src/locales/`. On Vercel the app detects `VERCEL=1` and puts SQLite and uploads in `/tmp` so the function can boot, because serverless functions have no persistent disk.
+
+**A Vercel deployment is a disposable demo, not a production host for this app.** On every cold start:
+
+- the database is recreated in `/tmp` and reseeded, so admin edits, prayers and messages disappear;
+- uploaded images vanish;
+- sessions are invalidated.
+
+Do not enter real church data, private prayer requests or member details into a Vercel demo. The newsletter sign-up and contact forms accept input but cannot persist it reliably.
+
+To publish the demo:
+
+```bash
+vercel login
+vercel --prod --yes \
+  --build-env NODE_ENV=production \
+  --env NODE_ENV=production \
+  --env TRUST_PROXY=1 \
+  --env SESSION_SECRET='<48+ random bytes>' \
+  --env ADMIN_EMAIL='<demo admin email>' \
+  --env ADMIN_PASSWORD='<demo admin password>'
+```
+
+Generate a secret with `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. Set `SITE_URL` to the assigned `https://…vercel.app` origin (or your domain) so canonical links and the sitemap are correct.
+
+For real church use, host on a VPS or container platform with a persistent volume (sections 7.1–7.3), or port the data layer to PostgreSQL plus S3-compatible object storage. The schema in `src/db.js` is plain SQL and ports directly.
 
 ---
 

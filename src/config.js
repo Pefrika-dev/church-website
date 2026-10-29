@@ -18,8 +18,12 @@ const bool = (value, fallback = false) => {
   return /^(1|true|yes|on)$/i.test(String(value));
 };
 
-const siteUrl = (process.env.SITE_URL || '').trim().replace(/\/+$/, '');
+const onVercel = Boolean(process.env.VERCEL);
+const vercelHost = (process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL || '').trim();
+const siteUrl = (process.env.SITE_URL || (vercelHost ? `https://${vercelHost}` : '')).trim().replace(/\/+$/, '');
 const isProd = process.env.NODE_ENV === 'production';
+const dataDir = process.env.DATA_DIR || (onVercel ? '/tmp/church-data' : path.join(ROOT, 'data'));
+const uploadDir = process.env.UPLOAD_DIR || (onVercel ? '/tmp/church-uploads' : path.join(ROOT, 'uploads'));
 
 const config = {
   root: ROOT,
@@ -37,10 +41,10 @@ const config = {
   },
   paths: {
     public: path.join(ROOT, 'public'),
-    uploads: path.join(ROOT, 'uploads'),
-    data: path.join(ROOT, 'data'),
+    uploads: uploadDir,
+    data: dataDir,
     locales: path.join(ROOT, 'src', 'locales'),
-    database: path.join(ROOT, 'data', 'church.sqlite'),
+    database: path.join(dataDir, 'church.sqlite'),
   },
   secureCookies: isProd,
   demoBanner: bool(process.env.DEMO_BANNER, true),

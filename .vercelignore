@@ -1,0 +1,7 @@
+data/
+uploads/
+node_modules/
+vibe_images/
+.env
+*.log
+.vercel/
