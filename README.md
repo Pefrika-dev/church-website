@@ -61,8 +61,8 @@ The site is populated only from the church's **public channels** (its Facebook p
 | --- | --- |
 | Name: Seventh-day Adventist Church Migori Central | Church Facebook/YouTube |
 | Motto: "Where Christ is exalted, People are Cherished and Truth is Treasured" | Church Facebook page |
-| Denomination, location and address (Migori–Isebania Road, opposite Migori Teachers' College, Migori 40400) | Adventist directory listing |
-| Email `sdamigoricentral@gmail.com`; Facebook and YouTube links | Public listings / channel |
+| Denomination, location and address (Migori–Isebania Highway, opposite Migori Teachers' College, P.O. Box 538-40400, Migori, Kenya) | Adventist directory listing and Facebook contact info |
+| Email `sdamigoricentral@gmail.com`; Facebook, YouTube and TikTok links | Facebook contact info and official channel/account |
 | Wednesday prayer service, 17:30 | Public church listing |
 | Six recent sermons with title, speaker, date, Scripture (where shown) and YouTube link | Church YouTube channel |
 | Ministries named in public announcements (Sabbath School, music, family life, prayer, media) | Church posts and streams |
@@ -73,7 +73,9 @@ The site is populated only from the church's **public channels** (its Facebook p
 - Phone, WhatsApp, senior pastor and leadership names, founding year, vision/mission statements (leadership page and about page say the content is pending).
 - Giving channels — `/give` shows only the "being finalised" state; no Paybill, Till, bank account or transaction reference exists in the project.
 - Upcoming events — the events table starts empty; the page shows its empty state.
-- Real congregation photographs — the gallery uses illustrative images and says so.
+- Real congregation photographs — only the six sermon thumbnails come from the church's YouTube channel; the gallery, hero, welcome and ministry images are illustrative and labelled as such.
+
+The Adventist directory still lists `info@sdamigoricentral.org` and `sdamigoricentral.org`; that domain no longer resolves, so the site uses the Gmail address published on the church's Facebook page instead.
 - Testimonies — none are published.
 
 Rules that remain in force:
@@ -230,7 +232,7 @@ The site is deliberately free of unverified facts. To complete it, collect and c
 6. **Giving** — verified M-Pesa Paybill/Till or bank details, exact account names and official guidance. Enter these in the dashboard only; never commit them to code.
 7. **Photos** — real congregation and building photos with permission, replacing the illustrative images.
 8. **Testimonies** — written consent from each person before publishing anything.
-9. **Social links** — confirm Facebook/YouTube and add Instagram or TikTok if the church uses them.
+9. **Social links** — Facebook, YouTube and TikTok are configured from the church's official accounts; add Instagram only if the church uses it.
 10. **Domain and email** — production domain for `SITE_URL`, and a mailbox to receive enquiries (see limitations).
 
 ---

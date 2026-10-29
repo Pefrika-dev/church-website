@@ -39,6 +39,7 @@ const ICONS = {
   facebook: '<path d="M14.5 8.5H17V5h-2.5A4.5 4.5 0 0 0 10 9.5V12H7.5v3.5H10V21h3.5v-5.5H16l.5-3.5h-3V9.5c0-.6.4-1 1-1Z"/>',
   instagram: '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/>',
   youtube: '<rect x="3" y="6" width="18" height="12" rx="3.5"/><path d="m10.5 9.5 4 2.5-4 2.5v-5Z" fill="currentColor" stroke="none"/>',
+  tiktok: '<path d="M14 4.5v9.2a3.7 3.7 0 1 1-3.2-3.66"/><path d="M14 4.5c.5 2.4 2.1 4 4.5 4.3v3c-1.7 0-3.3-.5-4.5-1.4"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/>',
   check: '<path d="m5 12.5 4.5 4.5L19 7"/>',
   heart: '<path d="M20.5 8.9c0 5-8.5 10-8.5 10s-8.5-5-8.5-10A4.6 4.6 0 0 1 12 5.8a4.6 4.6 0 0 1 8.5 3.1Z"/>',
@@ -304,6 +305,7 @@ function socialLinks(church, className = '') {
   add(church.facebook, 'Facebook', 'facebook');
   add(church.instagram, 'Instagram', 'instagram');
   add(church.youtube, 'YouTube', 'youtube');
+  add(church.tiktok, 'TikTok', 'tiktok');
   return links.join('');
 }
 

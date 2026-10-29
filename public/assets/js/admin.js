@@ -1586,6 +1586,7 @@
       fields: [
         { key: 'facebook', label: 'Facebook URL', type: 'url', max: 300 },
         { key: 'youtube', label: 'YouTube URL', type: 'url', max: 300 },
+        { key: 'tiktok', label: 'TikTok URL', type: 'url', max: 300 },
         { key: 'instagram', label: 'Instagram URL', type: 'url', max: 300 },
       ],
     },

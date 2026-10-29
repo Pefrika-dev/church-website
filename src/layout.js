@@ -28,7 +28,7 @@ function structuredData({ church, req, origin }) {
   }
   if (church.phone) data.telephone = church.phone;
   if (church.email) data.email = church.email;
-  const sameAs = [church.facebook, church.youtube, church.instagram].filter(Boolean);
+  const sameAs = [church.facebook, church.youtube, church.tiktok, church.instagram].filter(Boolean);
   if (sameAs.length) data.sameAs = sameAs;
 
   const website = {

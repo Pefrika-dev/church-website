@@ -462,6 +462,7 @@ function createAdminRouter() {
       mapQuery: 200,
       facebook: 300,
       youtube: 300,
+      tiktok: 300,
       instagram: 300,
       founded: 20,
       serviceNote: 300,
@@ -473,7 +474,7 @@ function createAdminRouter() {
     }
     if (!church.name || church.name.length < 2) errors.name = 'Church name is required.';
     if (church.email && !isEmail(church.email)) errors.email = 'Enter a valid email address.';
-    for (const key of ['facebook', 'youtube', 'instagram']) {
+    for (const key of ['facebook', 'youtube', 'tiktok', 'instagram']) {
       if (church[key] && !/^https?:\/\/[^\s]+$/i.test(church[key])) {
         errors[key] = 'Enter a full http(s) URL.';
         church[key] = '';
