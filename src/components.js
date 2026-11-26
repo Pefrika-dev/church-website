@@ -360,7 +360,9 @@ function footer({ page, locale, tfn, church, serviceTimes, year }) {
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© ${year} ${esc(church.name)}. <span data-i18n="footer.rights">${esc(tfn('footer.rights'))}</span></p>
+        <p>© ${year} ${esc(church.name)}. <span data-i18n="footer.rights">${esc(tfn('footer.rights'))}</span>
+          <span class="footer__credit">${locale === 'sw' ? 'Imejengwa na' : 'Built by'} <a href="https://www.thomashondochacha.co.ke" target="_blank" rel="noopener noreferrer">Thomas Hondo Chacha</a></span>
+        </p>
         <div class="footer__legal">
           <a href="/privacy" data-i18n="footer.privacy">${esc(tfn('footer.privacy'))}</a>
           <a href="/admin" data-i18n="footer.staff">${esc(tfn('footer.staff'))}</a>
