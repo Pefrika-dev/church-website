@@ -3,7 +3,7 @@
   "version": 2,
   "functions": {
     "api/index.js": {
-      "includeFiles": ["public/**", "src/locales/**"],
+      "includeFiles": "{public,src/locales}/**",
       "maxDuration": 30
     }
   },
