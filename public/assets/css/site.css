@@ -2205,7 +2205,8 @@ ol {
 }
 
 .promo__media picture,
-.promo__picture {
+.promo__picture,
+.promo__picture img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2488,7 +2489,8 @@ ol {
 }
 
 .newsletter__bg picture,
-.newsletter__picture {
+.newsletter__picture,
+.newsletter__picture img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -4656,6 +4658,53 @@ ol {
   }
   .section {
     padding-block: clamp(3.5rem, 9vw, 5rem);
+  }
+  .hero {
+    --hero-media-h: min(62vw, 420px);
+    display: block;
+    min-height: 0;
+    padding-top: var(--hero-media-h);
+  }
+  .hero__media,
+  .hero__media picture {
+    inset: 0 0 auto;
+    height: var(--hero-media-h);
+  }
+  .hero__media img {
+    height: 100%;
+    object-position: center 42%;
+  }
+  .hero__scrim {
+    inset: 0 0 auto;
+    height: var(--hero-media-h);
+    background: linear-gradient(0deg, var(--forest-deep) 0%, rgba(5, 19, 14, 0.4) 48%, rgba(5, 19, 14, 0.08) 100%);
+  }
+  .hero__inner {
+    padding-block: 2.25rem 3.25rem;
+    gap: 1.5rem;
+  }
+  .page-hero {
+    --page-hero-media-h: min(56vw, 380px);
+    display: block;
+    min-height: 0;
+    padding-top: var(--page-hero-media-h);
+  }
+  .page-hero__media,
+  .page-hero__media picture {
+    inset: 0 0 auto;
+    height: var(--page-hero-media-h);
+  }
+  .page-hero__media img {
+    height: 100%;
+    object-position: center 42%;
+  }
+  .page-hero__overlay {
+    inset: 0 0 auto;
+    height: var(--page-hero-media-h);
+    background: linear-gradient(0deg, var(--forest-deep) 0%, rgba(5, 19, 14, 0.38) 52%, rgba(5, 19, 14, 0.06) 100%);
+  }
+  .page-hero__inner {
+    padding-block: 2.25rem 3rem;
   }
   .section-head-row {
     align-items: flex-start;
