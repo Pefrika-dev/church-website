@@ -288,19 +288,32 @@ function seed() {
   }
 
   const sermonRows = all('SELECT video_url FROM sermons ORDER BY id');
-  const previousSeedIds = [
-    'syoSKRuSADE', 'Tnaf2SZyG7Y', 'cbgPNwA73lc',
-    'ZQGrXdsjCGU', 'f5iLhm8Iz28', 'avOpUhnYl5Y',
+  const seedSets = [
+    [
+      'syoSKRuSADE', 'Tnaf2SZyG7Y', 'cbgPNwA73lc',
+      'ZQGrXdsjCGU', 'f5iLhm8Iz28', 'avOpUhnYl5Y',
+    ],
+    [
+      'XTTubF1C6Sw', 'AlWdwnA2XHA', 'PIiSd9SnxUQ', 'WR2bsgVq3xs', 'IfGNYVly6o8',
+      'QweAGD0lHa8', 'WOiIkEj0uM4', 'KVQhBeefzMI', 'at1F3ab3hAA', 'hnvHHP5B_t8',
+      '13hiRmWJGNg', '1AXR4PRGCyQ', 'tabCZMpG6WY', '3HkoWuylV7E', 'CWO0bnSsd4c',
+    ],
   ];
-  const isPreviousSeed = sermonRows.length === previousSeedIds.length
-    && sermonRows.every((row) => previousSeedIds.some((id) => row.video_url && row.video_url.includes(id)));
+  const isKnownSeed = seedSets.some((ids) => sermonRows.length === ids.length
+    && sermonRows.every((row) => ids.some((id) => row.video_url && row.video_url.includes(id))));
 
-  if (!sermonRows.length || isPreviousSeed) {
-    if (isPreviousSeed) run('DELETE FROM sermons');
+  if (!sermonRows.length || isKnownSeed) {
+    if (isKnownSeed) run('DELETE FROM sermons');
     // Titles, speakers, dates and video links taken from the church's public YouTube channel.
-    const descriptionEn = 'Published on the church’s YouTube channel.';
-    const descriptionSw = 'Imechapishwa kwenye chaneli ya YouTube ya kanisa.';
+    const descriptionEn = 'Recorded at Migori Central SDA Church and published on the church’s YouTube channel.';
+    const descriptionSw = 'Ilirekodiwa katika Kanisa la SDA la Migori Central na kuchapishwa kwenye chaneli ya YouTube ya kanisa.';
     const rows = [
+      ['Remember Your First Love', 'Kumbuka Upendo Wako wa Kwanza', 'Elder Richard Mareri', '2026-10-24', '', 'syoSKRuSADE', 'remember-your-first-love-1200.jpg'],
+      ['Spirit of Prophecy: Ellen G. White — Her Life & Calling', 'Roho ya Unabii: Ellen G. White — Maisha na Wito Wake', 'Bro. Victor Caleb', '2026-10-17', '', 'Tnaf2SZyG7Y', 'spirit-of-prophecy-ellen-white-1200.jpg'],
+      ['I’m Getting Used to This', 'Ninazoea Hili', 'Ev. Thomas Nyarwanda', '2026-10-17', 'Acts 28:5', 'cbgPNwA73lc', 'getting-used-to-this-1200.jpg'],
+      ['Our God of Liberty', 'Mungu Wetu wa Uhuru', 'Elder Rodgers Abisai', '2026-10-10', '2 Corinthians 3:17', 'ZQGrXdsjCGU', 'our-god-of-liberty-1200.jpg'],
+      ['Prayer & Fasting', 'Maombi na Kufunga', 'Pr. Benard Okoko', '2026-10-03', '', 'f5iLhm8Iz28', 'prayer-and-fasting-1200.jpg'],
+      ['Determined to the End', 'Kusimama Hadi Mwisho', 'Elder Collins Bala', '2026-09-26', '', 'avOpUhnYl5Y', 'determined-to-the-end-1200.jpg'],
       ['Migori Central | Sabbath School Lesson 9 - Testing the Prophets | 21-27 November 2026', 'Migori Central | Somu la Shule ya Sabato 9 - Kujaribu Manabii | 21-27 Novemba 2026', 'Sabbath School', '2026-11-26', '', 'XTTubF1C6Sw', 'sabbath-school-lesson-9-testing-the-prophets-1200.jpg'],
       ['WKU CHILDREN MUSIC BONANZA || RC, SWNF & SENF ||26TH NOVEMBER 2026', 'TAMASHA LA MUZIKI LA WATOTO LA WKU || RC, SWNF NA SENF || 26 NOVEMBA 2026', 'WKU Children', '2026-11-26', '', 'AlWdwnA2XHA', 'wku-children-music-bonanza-1-1200.jpg'],
       ['WKU CHILDREN MUSIC BONANZA || RC, SWNF & SENF ||26TH NOVEMBER 2026', 'TAMASHA LA MUZIKI LA WATOTO LA WKU || RC, SWNF NA SENF || 26 NOVEMBA 2026', 'WKU Children', '2026-11-26', '', 'PIiSd9SnxUQ', 'wku-children-music-bonanza-2-1200.jpg'],
@@ -310,12 +323,6 @@ function seed() {
       ['MUSIC SABBATH || MORNING WORSHIP SERVICE || PR. BERING NGORE', 'SABATO YA MUZIKI || IBADA YA ASUBUHI || PR. BERING NGORE', 'Pr. Bering Ngore', '2026-11-14', '', 'WOiIkEj0uM4', 'music-sabbath-morning-worship-2-1200.jpg'],
       ['MUSIC SABBATH || MORNING WORSHIP SERVICE || PR. BERING NGORE', 'SABATO YA MUZIKI || IBADA YA ASUBUHI || PR. BERING NGORE', 'Pr. Bering Ngore', '2026-11-14', '', 'KVQhBeefzMI', 'music-sabbath-morning-worship-3-1200.jpg'],
       ['Migori Central | Sabbath School Lesson 7 - Now Hear This! | November 7-13', 'Migori Central | Somu la Shule ya Sabato 7 - Sikia Sasa! | 7-13 Novemba', 'Sabbath School', '2026-11-12', '', 'at1F3ab3hAA', 'sabbath-school-lesson-7-now-hear-this-1200.jpg'],
-      ['NOV WEEK OF PRAYER 2026 | DAY 7- AFTERNOON SERVICE | PR. BRIAN MANINGI', 'WIKI YA MAOMBI NOVEMBA 2026 | SIKU YA 7 - IBADA YA ALASIRI | PR. BRIAN MANINGI', 'Pr. Brian Maningi', '2026-11-08', '', 'hnvHHP5B_t8', 'nov-week-of-prayer-2026-day-7-afternoon-1200.jpg'],
-      ['NOV WEEK OF PRAYER 2026 | DAY 7- MORNING SERVICE | PR. JOHN ODIANGO', 'WIKI YA MAOMBI NOVEMBA 2026 | SIKU YA 7 - IBADA YA ASUBUHI | PR. JOHN ODIANGO', 'Pr. John Odiango', '2026-11-07', '', '13hiRmWJGNg', 'nov-week-of-prayer-2026-day-7-morning-1200.jpg'],
-      ['WEEK OF PRAYER | DAY 6- EVENING SERVICE | PR. JOHN ODIANGO', 'WIKI YA MAOMBI | SIKU YA 6 - IBADA YA JIONI | PR. JOHN ODIANGO', 'Pr. John Odiango', '2026-11-07', '', '1AXR4PRGCyQ', 'week-of-prayer-day-6-evening-1200.jpg'],
-      ['WEEK OF PRAYER | DAY 5- EVENING SERVICE | PR. JOHN ODIANGO', 'WIKI YA MAOMBI | SIKU YA 5 - IBADA YA JIONI | PR. JOHN ODIANGO', 'Pr. John Odiango', '2026-11-06', '', 'tabCZMpG6WY', 'week-of-prayer-day-5-evening-1200.jpg'],
-      ['Migori Central | Sabbath School Lesson 6 - The Prophetic Writings | 31 October - 6 November 2026', 'Migori Central | Somu la Shule ya Sabato 6 - Maandiko ya Unabii | 31 Oktoba - 6 Novemba 2026', 'Sabbath School', '2026-11-05', '', '3HkoWuylV7E', 'sabbath-school-lesson-6-prophetic-writings-1200.jpg'],
-      ['WEEK OF PRAYER | DAY 4- EVENING SERVICE | PR. JOHN ODIANGO', 'WIKI YA MAOMBI | SIKU YA 4 - IBADA YA JIONI | PR. JOHN ODIANGO', 'Pr. John Odiango', '2026-11-05', '', 'CWO0bnSsd4c', 'week-of-prayer-day-4-evening-1200.jpg'],
     ];
     rows.forEach((r) => {
       run(

@@ -66,7 +66,7 @@ The site is populated only from the church's **public channels** (its Facebook p
 | Denomination, location and address (Migori–Isebania Highway, opposite Migori Teachers' College, P.O. Box 538-40400, Migori, Kenya) | Adventist directory listing and Facebook contact info |
 | Email `sdamigoricentral@gmail.com`; Facebook, YouTube and TikTok links | Facebook contact info and official channel/account |
 | Wednesday prayer service, 17:30 | Public church listing |
-| Fifteen recent videos with title, speaker, date, Scripture (where shown) and YouTube link | Church YouTube channel |
+| Six earlier sermons plus nine newer videos, with title, speaker, date, Scripture (where shown) and YouTube link | Church YouTube channel |
 | Ministries named in public announcements (Sabbath School, music, family life, prayer, media) | Church posts and streams |
 
 **Not published anywhere yet — deliberately left blank:**

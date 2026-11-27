@@ -21,10 +21,16 @@ All photographs were collected from the public channels of **Seventh-day Adventi
 
 ## Sermon thumbnails
 
-The images in `public/assets/img/sermons/` are the YouTube thumbnails of the fifteen most recent videos on the church’s channel, resized to 1200px. They were published by the church itself and are linked back to the original videos on the Sermons page.
+The images in `public/assets/img/sermons/` are the YouTube thumbnails of the videos shown on the Sermons page — the six earlier sermons plus the nine newest uploads — resized to 1200px. They were published by the church itself and are linked back to the original videos.
 
 | File | Video ID |
 | --- | --- |
+| `remember-your-first-love-1200.jpg` | `syoSKRuSADE` |
+| `spirit-of-prophecy-ellen-white-1200.jpg` | `Tnaf2SZyG7Y` |
+| `getting-used-to-this-1200.jpg` | `cbgPNwA73lc` |
+| `our-god-of-liberty-1200.jpg` | `ZQGrXdsjCGU` |
+| `prayer-and-fasting-1200.jpg` | `f5iLhm8Iz28` |
+| `determined-to-the-end-1200.jpg` | `avOpUhnYl5Y` |
 | `sabbath-school-lesson-9-testing-the-prophets-1200.jpg` | `XTTubF1C6Sw` |
 | `wku-children-music-bonanza-1-1200.jpg` | `AlWdwnA2XHA` |
 | `wku-children-music-bonanza-2-1200.jpg` | `PIiSd9SnxUQ` |
@@ -34,11 +40,5 @@ The images in `public/assets/img/sermons/` are the YouTube thumbnails of the fif
 | `music-sabbath-morning-worship-2-1200.jpg` | `WOiIkEj0uM4` |
 | `music-sabbath-morning-worship-3-1200.jpg` | `KVQhBeefzMI` |
 | `sabbath-school-lesson-7-now-hear-this-1200.jpg` | `at1F3ab3hAA` |
-| `nov-week-of-prayer-2026-day-7-afternoon-1200.jpg` | `hnvHHP5B_t8` |
-| `nov-week-of-prayer-2026-day-7-morning-1200.jpg` | `13hiRmWJGNg` |
-| `week-of-prayer-day-6-evening-1200.jpg` | `1AXR4PRGCyQ` |
-| `week-of-prayer-day-5-evening-1200.jpg` | `tabCZMpG6WY` |
-| `sabbath-school-lesson-6-prophetic-writings-1200.jpg` | `3HkoWuylV7E` |
-| `week-of-prayer-day-4-evening-1200.jpg` | `CWO0bnSsd4c` |
 
 Confirm reuse permissions with the church before a permanent public launch.
