@@ -56,7 +56,7 @@ app.use((req, res, next) => {
     "img-src 'self' data:",
     "font-src 'self'",
     "connect-src 'self'",
-    "frame-src https://www.google.com https://maps.google.com",
+    "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com",
     "form-action 'self'",
     "base-uri 'self'",
     "object-src 'none'",

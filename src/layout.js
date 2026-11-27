@@ -77,6 +77,7 @@ function renderPage({
     page,
     origin,
     siteUrl: config.siteUrl,
+    youtube: church.youtube || '',
     formToken,
     theme: 'light',
   };
@@ -129,6 +130,23 @@ function renderPage({
       <img alt="" data-lightbox-img decoding="async">
       <figcaption data-lightbox-caption></figcaption>
     </figure>
+  </div>
+  <div class="video-modal" data-video-root hidden>
+    <div class="video-modal__backdrop" data-video-close></div>
+    <div class="video-modal__panel" role="dialog" aria-modal="true" aria-labelledby="video-modal-title">
+      <div class="video-modal__bar">
+        <h2 id="video-modal-title" data-video-title>${C.esc(t(locale, 'sermons.playerTitle'))}</h2>
+        <button class="icon-btn video-modal__close" data-video-close aria-label="${C.esc(t(locale, 'common.close'))}">${C.iconUse('close')}</button>
+      </div>
+      <div class="video-modal__frame" data-video-frame></div>
+      <div class="video-modal__footer">
+        <p data-i18n="sermons.playerNote">${C.esc(t(locale, 'sermons.playerNote'))}</p>
+        <div class="video-modal__links">
+          <a class="link-arrow" data-video-channel href="${C.esc(church.youtube)}" target="_blank" rel="noopener noreferrer">${C.iconUse('youtube')}${C.esc(t(locale, 'sermons.visitChannel'))}<span class="sr-only"> (opens in a new tab)</span></a>
+          <a class="link-arrow" data-video-source href="${C.esc(church.youtube)}" target="_blank" rel="noopener noreferrer">${C.iconUse('arrow-right')}${C.esc(t(locale, 'sermons.openYouTube'))}<span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+      </div>
+    </div>
   </div>
   ${C.iconSprite()}
   <script nonce="__NONCE__">window.__SITE__ = ${JSON.stringify(siteConfig).replace(/</g, '\\u003c')};</script>

@@ -108,6 +108,26 @@ function safeUrl(value, { image = false } = {}) {
   return '';
 }
 
+function youtubeId(value) {
+  const url = safeUrl(value);
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase();
+    if (host === 'youtu.be') {
+      const id = parsed.pathname.slice(1).split(/[/?#]/)[0];
+      return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : '';
+    }
+    if (host === 'youtube.com' || host === 'www.youtube.com' || host === 'm.youtube.com') {
+      const id = parsed.searchParams.get('v') || '';
+      return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : '';
+    }
+  } catch {
+    return '';
+  }
+  return '';
+}
+
 function icon(name, className = '') {
   const path = ICONS[name] || ICONS.sparkle;
   return `<svg class="icon ${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${path}</svg>`;
@@ -420,27 +440,34 @@ function serviceCard(service, locale, tfn) {
 }
 
 function sermonCard(sermon, locale, tfn, options = {}) {
+  const videoId = youtubeId(sermon.video_url);
+  const videoTitle = loc(sermon, 'title', locale);
   const image = sermon.thumbnail && safeUrl(sermon.thumbnail, { image: true })
-    ? imageTag(sermon.thumbnail, loc(sermon, 'title', locale), 'card-media__img')
-    : picture('preaching', { alt: loc(sermon, 'title', locale), sizes: '(min-width: 900px) 33vw, 100vw', className: 'card-media__picture' });
+    ? imageTag(sermon.thumbnail, videoTitle, 'card-media__img')
+    : picture('preaching', { alt: videoTitle, sizes: '(min-width: 900px) 33vw, 100vw', className: 'card-media__picture' });
   const search = `${sermon.title_en} ${sermon.title_sw || ''} ${sermon.speaker} ${sermon.scripture}`.toLowerCase();
+  const mediaTag = videoId ? 'button' : 'a';
+  const mediaAttrs = videoId
+    ? `type="button" class="card-media card-media--play" data-video-play data-video-id="${esc(videoId)}" data-video-title="${esc(videoTitle)}" aria-label="${esc(tfn('sermons.watchHere'))}: ${esc(videoTitle)}"`
+    : `class="card-media" href="/sermons#sermon-${sermon.id}" aria-label="${esc(videoTitle)}"`;
   return `<article class="sermon-card reveal" id="sermon-${sermon.id}" data-sermon data-search="${esc(search)}" data-speaker="${esc(sermon.speaker)}" data-date="${esc(sermon.preached_on)}">
-    <a class="card-media" href="/sermons#sermon-${sermon.id}" aria-label="${esc(loc(sermon, 'title', locale))}">
+    <${mediaTag} ${mediaAttrs}>
       ${image}
       <span class="card-media__shade"></span>
       ${sermon.is_sample ? `<span class="card-media__badge">${esc(tfn('common.sample'))}</span>` : ''}
       <span class="play-badge">${iconUse('play')}</span>
-    </a>
+    </${mediaTag}>
     <div class="sermon-card__body">
       <div class="meta-row">
         <time datetime="${esc(sermon.preached_on)}" data-date="${esc(sermon.preached_on)}">${esc(formatDate(sermon.preached_on, locale))}</time>
         ${sermon.scripture ? `<span class="meta-row__sep" aria-hidden="true">·</span><span class="meta-row__scripture">${esc(sermon.scripture)}</span>` : ''}
       </div>
-      <h3 class="sermon-card__title"><a href="/sermons#sermon-${sermon.id}" ${locAttr(sermon, 'title', locale)}>${esc(loc(sermon, 'title', locale))}</a></h3>
+      <h3 class="sermon-card__title"><a href="/sermons#sermon-${sermon.id}" ${locAttr(sermon, 'title', locale)}>${esc(videoTitle)}</a></h3>
       <p class="sermon-card__speaker">${esc(tfn('sermons.speaker'))}: <span ${locAttr(sermon, 'speaker', locale)}>${esc(sermon.speaker)}</span></p>
       <p class="sermon-card__text" ${locAttr(sermon, 'description', locale)}>${esc(loc(sermon, 'description', locale))}</p>
       <div class="sermon-card__actions">
-        ${sermon.video_url ? `<a class="link-arrow" href="${esc(safeUrl(sermon.video_url))}" target="_blank" rel="noopener noreferrer">${iconUse('play')}${esc(tfn('sermons.watch'))}<span class="sr-only"> (opens in a new tab)</span></a>` : ''}
+        ${videoId ? `<button type="button" class="link-arrow link-arrow--button" data-video-play data-video-id="${esc(videoId)}" data-video-title="${esc(videoTitle)}">${iconUse('play')}${esc(tfn('sermons.watchHere'))}</button>` : ''}
+        ${sermon.video_url ? `<a class="link-arrow" href="${esc(safeUrl(sermon.video_url))}" target="_blank" rel="noopener noreferrer">${iconUse('youtube')}${esc(tfn('sermons.openYouTube'))}<span class="sr-only"> (opens in a new tab)</span></a>` : ''}
         ${sermon.audio_url ? `<a class="link-arrow" href="${esc(safeUrl(sermon.audio_url))}" target="_blank" rel="noopener noreferrer">${iconUse('music')}${esc(tfn('sermons.listen'))}</a>` : ''}
         ${!sermon.video_url && !sermon.audio_url ? `<span class="pending-label">${iconUse('clock')}${esc(tfn('sermons.mediaPending'))}</span>` : ''}
       </div>

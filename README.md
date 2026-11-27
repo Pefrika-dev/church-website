@@ -16,7 +16,7 @@ Built by [Thomas Hondo Chacha](https://www.thomashondochacha.co.ke) — Software
 | About | `/about` | Story, vision, mission, beliefs, leadership preview |
 | Leadership | `/leadership` | Profiles appear once the church confirms names, roles and photographs |
 | Ministries | `/ministries` | Ministry cards from the database |
-| Sermons & Media | `/sermons` | Search, speaker filter, newest/oldest sort, external video/audio links only |
+| Sermons & Media | `/sermons` | Search, speaker filter, newest/oldest sort, videos play on the page in a privacy-friendly YouTube player, with optional links to the video and church channel |
 | Events & Conferences | `/events` | Upcoming and past events with dates in Africa/Nairobi time |
 | Gallery | `/gallery` | Responsive image grid with accessible lightbox |
 | Online Giving | `/give` | Shows payment details **only** when a church admin saves a method and marks it verified; otherwise it explains how to ask the church |
@@ -333,7 +333,7 @@ uploads/                  Dashboard image uploads (created at runtime, git-ignor
 
 - **No email delivery.** Contact, prayer, visit and newsletter submissions are stored in the database and shown in the dashboard; the server does not send email notifications. Add an SMTP/API integration before relying on email alerts.
 - **No payment processing.** Giving is informational only. The church enters its own verified details; the site never handles transactions or stores payment credentials.
-- **No media hosting or upload for sermons.** Sermons accept external video/audio URLs (for example an unlisted YouTube link). There is no transcoding or file hosting.
+- **No media hosting or upload for sermons.** Sermons accept external video/audio URLs (for example an unlisted YouTube link). There is no transcoding or file hosting. YouTube videos are embedded with `youtube-nocookie` and load only when a visitor presses play; the direct video and channel links stay available as optional choices.
 - **Single-instance SQLite.** Appropriate for a single church site; it is not designed for horizontal scaling or high write concurrency.
 - **Photographs come from the church’s public YouTube channel and Facebook page.** Confirm reuse permissions with the church before a permanent public launch.
 - **Testimonies are not managed in the dashboard.** The site publishes a consent statement and routes stories through the contact form; publishing a testimony requires adding it deliberately.
