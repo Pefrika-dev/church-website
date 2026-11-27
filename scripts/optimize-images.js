@@ -4,54 +4,53 @@ const fs = require('node:fs');
 const path = require('node:path');
 const sharp = require('sharp');
 
-const SOURCE_DIR = path.join(__dirname, '..', 'vibe_images');
+const SOURCE_DIR = path.join(__dirname, '..', 'photo-sources');
 const OUT_DIR = path.join(__dirname, '..', 'public', 'assets', 'img');
 
+// Each output key points to a photograph collected from the church's own
+// public channels. See photo-sources/SOURCES.md for the exact source of each file.
 const MAP = {
-  'hero-worship': 'hero',
-  'community-welcome': 'welcome',
-  'pastor-portrait': 'pastor',
-  'gospel-choir': 'choir',
-  'prayer-bible': 'prayer',
-  'bible-study': 'bible-study',
-  'community-outreach': 'outreach',
-  'youth-fellowship': 'youth',
-  'womens-fellowship': 'women',
-  'church-exterior': 'exterior',
-  'hands-raised': 'worship',
-  'preaching': 'preaching',
+  hero: 'hero.jpg',
+  exterior: 'exterior.jpg',
+  welcome: 'welcome.jpg',
+  pastor: 'pastor.jpg',
+  choir: 'choir.jpg',
+  prayer: 'prayer.jpg',
+  'bible-study': 'bible-study.jpg',
+  outreach: 'outreach.jpg',
+  youth: 'youth.jpg',
+  women: 'women.jpg',
+  worship: 'worship.jpg',
+  preaching: 'preaching.jpg',
 };
 
 const WIDTHS = [480, 800, 1200, 1600];
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
-function findSource(prefix) {
-  const file = fs
-    .readdirSync(SOURCE_DIR)
-    .find((name) => name.startsWith(prefix + '_') && name.endsWith('.png'));
-  if (!file) throw new Error(`Missing source image for ${prefix}`);
-  return path.join(SOURCE_DIR, file);
+function sourcePath(file) {
+  const full = path.join(SOURCE_DIR, file);
+  if (!fs.existsSync(full)) throw new Error(`Missing source photograph: ${file}`);
+  return full;
 }
 
 (async () => {
-  for (const [srcKey, outKey] of Object.entries(MAP)) {
-    const source = findSource(srcKey);
+  for (const [outKey, file] of Object.entries(MAP)) {
+    const source = sourcePath(file);
     const meta = await sharp(source).metadata();
     for (const width of WIDTHS) {
-      if (width > meta.width) continue;
-      const base = sharp(source).resize({ width, withoutEnlargement: true });
+      const resized = sharp(source).resize({ width });
       await Promise.all([
-        base.clone().jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(OUT_DIR, `${outKey}-${width}.jpg`)),
-        base.clone().webp({ quality: 78, effort: 5 }).toFile(path.join(OUT_DIR, `${outKey}-${width}.webp`)),
+        resized.clone().jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(OUT_DIR, `${outKey}-${width}.jpg`)),
+        resized.clone().webp({ quality: 78, effort: 5 }).toFile(path.join(OUT_DIR, `${outKey}-${width}.webp`)),
       ]);
     }
-    console.log(`optimized ${outKey} (${meta.width}x${meta.height})`);
+    console.log(`optimized ${outKey} (source ${meta.width}x${meta.height})`);
   }
 
-  // Social sharing image (1200x630 crop of the hero)
-  const hero = findSource('hero-worship');
-  await sharp(hero).resize({ width: 1200, height: 630, fit: 'cover', position: 'centre' })
+  // Social sharing image (1200x630 crop of the hero photograph).
+  await sharp(sourcePath(MAP.hero))
+    .resize({ width: 1200, height: 630, fit: 'cover', position: 'centre' })
     .jpeg({ quality: 84, mozjpeg: true })
     .toFile(path.join(OUT_DIR, 'og-image.jpg'));
 

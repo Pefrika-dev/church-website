@@ -1,7 +1,7 @@
 data/
 uploads/
 node_modules/
-vibe_images/
+photo-sources/
 .env
 *.log
 .vercel/

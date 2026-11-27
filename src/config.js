@@ -47,7 +47,7 @@ const config = {
     database: path.join(dataDir, 'church.sqlite'),
   },
   secureCookies: isProd,
-  demoBanner: bool(process.env.DEMO_BANNER, true),
+  reviewNotice: bool(process.env.REVIEW_NOTICE, true),
   timezone: 'Africa/Nairobi',
 };
 

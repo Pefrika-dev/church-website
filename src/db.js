@@ -331,19 +331,19 @@ function seed() {
 
   if (!get('SELECT id FROM gallery LIMIT 1')) {
     const rows = [
-      ['/assets/img/worship-1200.jpg', 'A congregation worshipping with hands raised', 'Mkutano wakiabudu kwa kuinua mikono', 'Sabbath worship', 'Ibada ya Sabato'],
-      ['/assets/img/choir-1200.jpg', 'A gospel choir singing in the sanctuary', 'Kwaya ya injili ikiimba hekaluni', 'Music and choir', 'Muziki na kwaya'],
-      ['/assets/img/prayer-1200.jpg', 'Hands clasped in prayer over an open Bible', 'Mikono imeshikana katika maombi juu ya Biblia', 'Prayer', 'Maombi'],
-      ['/assets/img/bible-study-1200.jpg', 'A small group studying the Bible together', 'Kikundi kidogo wakijifunza Biblia pamoja', 'Sabbath School', 'Shule ya Sabato'],
-      ['/assets/img/outreach-1200.jpg', 'Church volunteers serving the community', 'Wajitolea wa kanisa wakihudumia jamii', 'Community service', 'Huduma kwa jamii'],
-      ['/assets/img/youth-1200.jpg', 'Young people worshipping together', 'Vijana wakiabudu pamoja', 'Young people', 'Vijana'],
-      ['/assets/img/women-1200.jpg', 'Women sharing tea and conversation', 'Wanawake wakishiriki chai na mazungumzo', 'Family life', 'Maisha ya familia'],
-      ['/assets/img/welcome-1200.jpg', 'Members greeting one another after service', 'Waumini wakisalimiana baada ya ibada', 'Fellowship after service', 'Ushirika baada ya ibada'],
+      ['/assets/img/worship-1200.jpg', 'Members of Migori Central SDA Church in Sabbath worship', 'Waumini wa Kanisa la SDA Migori Central wakiabudu Sabato', 'Sabbath worship at Migori Central', 'Ibada ya Sabato huko Migori Central'],
+      ['/assets/img/choir-1200.jpg', 'Women Ministry Choir at Migori Central SDA Church', 'Kwaya ya Huduma ya Wanawake huko Migori Central', 'Music and choir', 'Muziki na kwaya'],
+      ['/assets/img/prayer-1200.jpg', 'Friday vespers at Migori Central SDA Church', 'Jioni ya Ijumaa huko Migori Central', 'Prayer and vespers', 'Maombi na jioni ya ibada'],
+      ['/assets/img/bible-study-1200.jpg', 'Sabbath School class at Migori Central SDA Church', 'Darasa la Shule ya Sabato huko Migori Central', 'Sabbath School', 'Shule ya Sabato'],
+      ['/assets/img/outreach-1200.jpg', 'Members of Migori Central SDA Church serving the community', 'Waumini wa Kanisa la SDA Migori Central wakihudumia jamii', 'Community service', 'Huduma kwa jamii'],
+      ['/assets/img/youth-1200.jpg', 'Young people at a revival meeting at Migori Central', 'Vijana kwenye mkutano wa uamsho huko Migori Central', 'Young people', 'Vijana'],
+      ['/assets/img/women-1200.jpg', 'Women Ministry Choir singing at Migori Central', 'Kwaya ya Wanawake ikiimba huko Migori Central', 'Women’s ministry', 'Huduma ya wanawake'],
+      ['/assets/img/welcome-1200.jpg', 'Members of Migori Central SDA Church together', 'Waumini wa Kanisa la SDA Migori Central pamoja', 'Church family', 'Familia ya kanisa'],
     ];
     rows.forEach((r, i) => {
       run(
         `INSERT INTO gallery (image_path, alt_en, alt_sw, caption_en, caption_sw, is_active, is_sample, sort_order, created_at)
-         VALUES (?, ?, ?, ?, ?, 1, 1, ?, ?)`,
+         VALUES (?, ?, ?, ?, ?, 1, 0, ?, ?)`,
         [r[0], r[1], r[2], r[3], r[4], i, stamp]
       );
     });

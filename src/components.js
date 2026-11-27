@@ -366,7 +366,7 @@ function footer({ page, locale, tfn, church, serviceTimes, year }) {
           <a href="/admin" data-i18n="footer.staff">${esc(tfn('footer.staff'))}</a>
         </div>
       </div>
-      <p class="footer__note" data-i18n="footer.demo">${esc(tfn('footer.demo'))}</p>
+      <p class="footer__note" data-i18n="footer.status">${esc(tfn('footer.status'))}</p>
       <p class="footer__note footer__note--fine" data-i18n="footer.photoCredit">${esc(tfn('footer.photoCredit'))}</p>
     </div>
   </footer>

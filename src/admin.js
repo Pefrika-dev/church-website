@@ -42,7 +42,7 @@ const RESOURCES = {
       { name: 'link', type: 'link', max: 300, label: 'Link' },
       { name: 'is_active', type: 'bool', default: 1, label: 'Active' },
       { name: 'sort_order', type: 'int', default: 0, label: 'Sort order' },
-      { name: 'is_sample', type: 'bool', default: 0, label: 'Sample content' },
+      { name: 'is_sample', type: 'bool', default: 0, label: 'Awaiting confirmation' },
     ],
   },
   service_times: {
@@ -62,7 +62,7 @@ const RESOURCES = {
       { name: 'description_sw', type: 'text', max: 500, label: 'Description (Kiswahili)' },
       { name: 'is_active', type: 'bool', default: 1, label: 'Active' },
       { name: 'sort_order', type: 'int', default: 0, label: 'Sort order' },
-      { name: 'is_sample', type: 'bool', default: 0, label: 'Sample content' },
+      { name: 'is_sample', type: 'bool', default: 0, label: 'Awaiting confirmation' },
     ],
   },
   sermons: {
@@ -84,7 +84,7 @@ const RESOURCES = {
       { name: 'audio_url', type: 'url', max: 500, label: 'Audio URL' },
       { name: 'thumbnail', type: 'image', max: 300, label: 'Thumbnail' },
       { name: 'is_published', type: 'bool', default: 1, label: 'Published' },
-      { name: 'is_sample', type: 'bool', default: 0, label: 'Sample content' },
+      { name: 'is_sample', type: 'bool', default: 0, label: 'Awaiting confirmation' },
     ],
   },
   events: {
@@ -105,7 +105,7 @@ const RESOURCES = {
       { name: 'poster', type: 'image', max: 300, label: 'Poster' },
       { name: 'registration_url', type: 'url', max: 500, label: 'Registration URL' },
       { name: 'is_published', type: 'bool', default: 1, label: 'Published' },
-      { name: 'is_sample', type: 'bool', default: 0, label: 'Sample content' },
+      { name: 'is_sample', type: 'bool', default: 0, label: 'Awaiting confirmation' },
     ],
   },
   ministries: {
@@ -131,7 +131,7 @@ const RESOURCES = {
       { name: 'contact_email', type: 'email', max: 120, label: 'Contact email' },
       { name: 'is_active', type: 'bool', default: 1, label: 'Active' },
       { name: 'sort_order', type: 'int', default: 0, label: 'Sort order' },
-      { name: 'is_sample', type: 'bool', default: 0, label: 'Sample content' },
+      { name: 'is_sample', type: 'bool', default: 0, label: 'Awaiting confirmation' },
     ],
   },
   gallery: {
@@ -149,7 +149,7 @@ const RESOURCES = {
       { name: 'caption_sw', type: 'text', max: 200, label: 'Caption (Kiswahili)' },
       { name: 'is_active', type: 'bool', default: 1, label: 'Active' },
       { name: 'sort_order', type: 'int', default: 0, label: 'Sort order' },
-      { name: 'is_sample', type: 'bool', default: 0, label: 'Sample content' },
+      { name: 'is_sample', type: 'bool', default: 0, label: 'Awaiting confirmation' },
     ],
   },
   prayer_requests: {

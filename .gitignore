@@ -3,7 +3,6 @@ node_modules/
 data/*.sqlite*
 data/*.db*
 uploads/
-vibe_images/
 *.log
 .DS_Store
 .vercel/

@@ -227,7 +227,7 @@
     gallery:
       'Upload a JPG, PNG or WebP photo. Write alt text that describes what is happening for people who cannot see the image.',
     sermons:
-      'Only add media links that the church has actually supplied. Every item is labelled as sample until you replace it.',
+      'Only add media links that the church has actually supplied. Items awaiting confirmation are labelled in the dashboard.',
     events:
       'Enter times in East Africa Time. Leave a field blank rather than inventing a venue or detail.',
     ministries:
@@ -285,7 +285,7 @@
           : '<span class="badge badge--muted">Draft</span>'
       );
     }
-    if (row.is_sample) out.push('<span class="badge badge--sample">Sample</span>');
+    if (row.is_sample) out.push('<span class="badge badge--sample">To confirm</span>');
     return out.join(' ') || '—';
   }
 
@@ -916,7 +916,7 @@
 
       <div class="a-banner a-banner--info">
         ${icon('shield')}
-        <span><strong>Sample content is clearly labelled on the public site.</strong> Replace sample sermons, events, ministries and photographs with the church’s own details before launch.</span>
+        <span><strong>Details awaiting confirmation are clearly labelled on the public site.</strong> Add the church’s own confirmed sermons, events, ministries and photographs in the dashboard.</span>
       </div>
 
       <div class="stat-grid">${cards.join('')}</div>

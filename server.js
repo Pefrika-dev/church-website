@@ -363,7 +363,7 @@ if (cleanup.unref) cleanup.unref();
 if (require.main === module) {
   app.listen(config.port, config.host, () => {
     console.log(`Church site running at http://localhost:${config.port} (${config.isProd ? 'production' : 'development'})`);
-    if (config.demoBanner) console.log('Some illustrative content remains visible. Review it in /admin before launch.');
+    if (config.reviewNotice) console.log('Some church details still await confirmation. Review them in /admin before launch.');
   });
 }
 

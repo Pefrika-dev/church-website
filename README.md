@@ -12,7 +12,7 @@ A server-rendered church website for **Seventh-day Adventist Church Migori Centr
 | --- | --- | --- |
 | Home | `/` | Announcement bar, hero, welcome, service times, about, sermons, ministries, events, testimonies statement, gallery, giving guidance, prayer CTA, newsletter, footer |
 | About | `/about` | Story, vision, mission, beliefs, leadership preview |
-| Leadership | `/leadership` | Placeholder profiles with a clear "content pending" state |
+| Leadership | `/leadership` | Profiles appear once the church confirms names, roles and photographs |
 | Ministries | `/ministries` | Ministry cards from the database |
 | Sermons & Media | `/sermons` | Search, speaker filter, newest/oldest sort, external video/audio links only |
 | Events & Conferences | `/events` | Upcoming and past events with dates in Africa/Nairobi time |
@@ -41,7 +41,7 @@ Global features on every page:
   - **Administrator** — full access.
   - **Editor** — content create/update, inbox viewing and status changes; no deletes, settings, users, subscribers or audit log.
 - Modules:
-  - **Overview** — counters, a notice when illustrative rows remain, latest prayer requests and messages.
+  - **Overview** — counters, a notice when rows still await confirmation, latest prayer requests and messages.
   - **Content** — announcements, service times, sermons (with video/audio URL fields), events, ministries, gallery.
   - **Messages** — prayer requests, visit requests, contact messages with status workflow and detail view.
   - **Subscribers** — newsletter list with CSV export.
@@ -73,7 +73,7 @@ The site is populated only from the church's **public channels** (its Facebook p
 - Phone, WhatsApp, senior pastor and leadership names, founding year, vision/mission statements (leadership page and about page say the content is pending).
 - Giving channels — `/give` shows only the "being finalised" state; no Paybill, Till, bank account or transaction reference exists in the project.
 - Upcoming events — the events table starts empty; the page shows its empty state.
-- Real congregation photographs — only the six sermon thumbnails come from the church's YouTube channel; the gallery, hero, welcome and ministry images are illustrative and labelled as such.
+- Congregation photographs — the gallery, hero, welcome and ministry images now come from the church's own YouTube channel and Facebook page; the six sermon thumbnails also come from YouTube. Confirm reuse permissions with the church before permanent launch.
 
 The Adventist directory still lists `info@sdamigoricentral.org` and `sdamigoricentral.org`; that domain no longer resolves, so the site uses the Gmail address published on the church's Facebook page instead.
 - Testimonies — none are published.
@@ -143,7 +143,7 @@ On first start the database is created at `data/church.sqlite`, the schema is ap
 | `ADMIN_EMAIL` | first start | — | Email for the first administrator. |
 | `ADMIN_PASSWORD` | first start | — | Password for the first administrator (minimum 10 characters recommended). |
 | `TRUST_PROXY` | behind proxy | `0` | Set to `1` when running behind Nginx/Caddy so client IPs and HTTPS are detected correctly. |
-| `DEMO_BANNER` | no | `1` | When truthy, the server logs a reminder that sample content is visible. |
+| `REVIEW_NOTICE` | no | `1` | When truthy, the server logs a reminder that some church details still await confirmation. |
 
 Secrets belong only in `.env` (git-ignored) or your host's environment settings. Never commit `.env`.
 
@@ -154,7 +154,7 @@ Secrets belong only in `.env` (git-ignored) or your host's environment settings.
 - Engine: SQLite through Node's built-in `node:sqlite` (`DatabaseSync`), WAL journal mode, foreign keys on.
 - File: `data/church.sqlite` (plus `-wal`/`-shm` while running).
 - Schema is created with `CREATE TABLE IF NOT EXISTS`; there is no separate migration step for v1.
-- Seeding is idempotent: sample content is inserted only when the relevant table is empty; `settings` rows are created only when missing.
+- Seeding is idempotent: initial content is inserted only when the relevant table is empty; `settings` rows are created only when missing.
 - Uploaded images are re-encoded into `uploads/` and served from `/uploads`.
 
 **Backup:** stop the server (or run `PRAGMA wal_checkpoint(TRUNCATE)`), then copy `data/church.sqlite` and the `uploads/` directory. Both are git-ignored and must be included in your deployment backup strategy.
@@ -211,26 +211,26 @@ WantedBy=multi-user.target
 - Sign in at `/admin` and **change the administrator password** (My account).
 - Confirm the church profile in Settings → Church profile (address, email and social links are pre-filled; add phone, WhatsApp and pastor when confirmed).
 - Add the Sabbath School and Divine Service start times, then remove the "being confirmed" notes by clearing the blank rows.
-- Add real events, ministry photos and congregation photos; replace the illustrative gallery images.
+- Add real events and confirm the ministry and congregation photographs; the gallery already uses photographs from the church's public channels.
 - Add giving methods only after the church confirms them, and tick **Verified**.
 - Review the privacy policy wording with the church.
 - Confirm `SITE_URL`, `robots.txt` and `sitemap.xml` use the real domain, and that `/admin` responds with `X-Robots-Tag: noindex`.
 
 Health check: `GET /healthz` returns `{"ok":true}` when the database is reachable.
 
-### 7.5 Vercel demo (evaluation only)
+### 7.5 Vercel evaluation deployment
 
 The repository ships a Vercel entry point (`api/index.js`), a rewrite to it in `vercel.json`, and `includeFiles` for `public/` and `src/locales/`. On Vercel the app detects `VERCEL=1` and puts SQLite and uploads in `/tmp` so the function can boot, because serverless functions have no persistent disk.
 
-**A Vercel deployment is a disposable demo, not a production host for this app.** On every cold start:
+**A Vercel deployment is a disposable evaluation host, not a production host for this app.** On every cold start:
 
 - the database is recreated in `/tmp` and reseeded, so admin edits, prayers and messages disappear;
 - uploaded images vanish;
 - sessions are invalidated.
 
-Do not enter real church data, private prayer requests or member details into a Vercel demo. The newsletter sign-up and contact forms accept input but cannot persist it reliably.
+Do not enter real church data, private prayer requests or member details into a Vercel evaluation deployment. The newsletter sign-up and contact forms accept input but cannot persist it reliably.
 
-To publish the demo:
+To publish the evaluation build:
 
 ```bash
 vercel login
@@ -239,8 +239,8 @@ vercel --prod --yes \
   --env NODE_ENV=production \
   --env TRUST_PROXY=1 \
   --env SESSION_SECRET='<48+ random bytes>' \
-  --env ADMIN_EMAIL='<demo admin email>' \
-  --env ADMIN_PASSWORD='<demo admin password>'
+  --env ADMIN_EMAIL='<evaluation admin email>' \
+  --env ADMIN_PASSWORD='<evaluation admin password>'
 ```
 
 Generate a secret with `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. Set `SITE_URL` to the assigned `https://…vercel.app` origin (or your domain) so canonical links and the sitemap are correct.
@@ -259,7 +259,7 @@ The site is deliberately free of unverified facts. To complete it, collect and c
 4. **History and statements** — year founded, milestones, and approved vision, mission and full statement of faith.
 5. **Events** — dates, times, venues, descriptions and posters.
 6. **Giving** — verified M-Pesa Paybill/Till or bank details, exact account names and official guidance. Enter these in the dashboard only; never commit them to code.
-7. **Photos** — real congregation and building photos with permission, replacing the illustrative images.
+7. **Photos** — confirm reuse permission for the congregation and building photographs currently sourced from the church’s public channels.
 8. **Testimonies** — written consent from each person before publishing anything.
 9. **Social links** — Facebook, YouTube and TikTok are configured from the church's official accounts; add Instagram only if the church uses it.
 10. **Domain and email** — production domain for `SITE_URL`, and a mailbox to receive enquiries (see limitations).
@@ -285,7 +285,7 @@ The site is deliberately free of unverified facts. To complete it, collect and c
 ```
 server.js                 Express app: routes, headers, public forms, sitemap, 404/500
 src/
-  config.js               Environment loading, paths, placeholder defaults
+  config.js               Environment loading, paths and neutral defaults
   db.js                   Schema, WAL setup, idempotent seeding, settings helpers
   passwords.js            scrypt hashing and verification
   security.js             Sessions, CSRF, form tokens, rate limits, audit, hashing
@@ -311,7 +311,7 @@ public/
   assets/js/admin.js      Dashboard SPA (sessions, CRUD, settings, team)
   assets/fonts/           Self-hosted Fraunces and Manrope (woff2)
   assets/img/             Responsive WebP/JPG photography, OG image, icons
-scripts/optimize-images.js  Regenerates responsive images from vibe_images/
+scripts/optimize-images.js  Regenerates responsive images from photo-sources/
 data/                     SQLite database (created at runtime, git-ignored)
 uploads/                  Dashboard image uploads (created at runtime, git-ignored)
 ```
@@ -323,7 +323,7 @@ uploads/                  Dashboard image uploads (created at runtime, git-ignor
 | `npm start` | Run the server. |
 | `npm run dev` | Run with `--watch` for development. |
 | `npm run check` | Syntax-check `server.js`. |
-| `npm run optimize-images` | Rebuild responsive WebP/JPG variants from `vibe_images/`. |
+| `npm run optimize-images` | Rebuild responsive WebP/JPG variants from `photo-sources/`. |
 
 ---
 
@@ -333,7 +333,7 @@ uploads/                  Dashboard image uploads (created at runtime, git-ignor
 - **No payment processing.** Giving is informational only. The church enters its own verified details; the site never handles transactions or stores payment credentials.
 - **No media hosting or upload for sermons.** Sermons accept external video/audio URLs (for example an unlisted YouTube link). There is no transcoding or file hosting.
 - **Single-instance SQLite.** Appropriate for a single church site; it is not designed for horizontal scaling or high write concurrency.
-- **Images are illustrative placeholders.** Replace them with licensed photos of the real congregation.
+- **Photographs come from the church’s public YouTube channel and Facebook page.** Confirm reuse permissions with the church before a permanent public launch.
 - **Testimonies are not managed in the dashboard.** The site publishes a consent statement and routes stories through the contact form; publishing a testimony requires adding it deliberately.
 - **Kiswahili coverage** applies to the interface and validation messages. Church-entered content uses separate English and Kiswahili fields with fallback; incomplete translations fall back to the other language.
 - **Browser testing** covered page rendering, forms, filters, theme, language, lightbox, admin CRUD, auth and CSRF through DOM and network inspection. Pixel-perfect visual QA on physical devices should still be done before launch.
