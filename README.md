@@ -2,7 +2,7 @@
 
 A server-rendered church website for **Seventh-day Adventist Church Migori Central** with a secure staff dashboard, built with Node.js, Express 5, plain HTML/CSS/JavaScript and the SQLite engine that ships with Node (`node:sqlite`). No frontend framework, no external database, no third-party trackers, no runtime build step.
 
-Built by [Thomas Hondo Chacha](https://www.thomashondochacha.co.ke) — Software Engineer. This is a website demonstration; church details still need confirmation.
+Built by [Thomas Hondo Chacha](https://www.thomashondochacha.co.ke) — Software Engineer. Church details still awaiting confirmation are identified clearly in the site and dashboard.
 
 ---
 
