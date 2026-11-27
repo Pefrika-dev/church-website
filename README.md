@@ -66,7 +66,7 @@ The site is populated only from the church's **public channels** (its Facebook p
 | Denomination, location and address (Migori–Isebania Highway, opposite Migori Teachers' College, P.O. Box 538-40400, Migori, Kenya) | Adventist directory listing and Facebook contact info |
 | Email `sdamigoricentral@gmail.com`; Facebook, YouTube and TikTok links | Facebook contact info and official channel/account |
 | Wednesday prayer service, 17:30 | Public church listing |
-| Six recent sermons with title, speaker, date, Scripture (where shown) and YouTube link | Church YouTube channel |
+| Fifteen recent videos with title, speaker, date, Scripture (where shown) and YouTube link | Church YouTube channel |
 | Ministries named in public announcements (Sabbath School, music, family life, prayer, media) | Church posts and streams |
 
 **Not published anywhere yet — deliberately left blank:**
@@ -75,7 +75,7 @@ The site is populated only from the church's **public channels** (its Facebook p
 - Phone, WhatsApp, senior pastor and leadership names, founding year, vision/mission statements (leadership page and about page say the content is pending).
 - Giving channels — `/give` shows only the "being finalised" state; no Paybill, Till, bank account or transaction reference exists in the project.
 - Upcoming events — the events table starts empty; the page shows its empty state.
-- Congregation photographs — the gallery, hero, welcome and ministry images now come from the church's own YouTube channel and Facebook page; the six sermon thumbnails also come from YouTube. Confirm reuse permissions with the church before permanent launch.
+- Congregation photographs — the gallery, hero, welcome and ministry images now come from the church's own YouTube channel and Facebook page; the fifteen sermon thumbnails also come from YouTube. Confirm reuse permissions with the church before permanent launch.
 
 The Adventist directory still lists `info@sdamigoricentral.org` and `sdamigoricentral.org`; that domain no longer resolves, so the site uses the Gmail address published on the church's Facebook page instead.
 - Testimonies — none are published.
