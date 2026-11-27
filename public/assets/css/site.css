@@ -4237,6 +4237,21 @@ ol {
   margin: 0;
 }
 
+.footer__credit {
+  display: inline-block;
+  margin-left: 0.4rem;
+}
+
+.footer__credit a {
+  color: rgba(248, 245, 235, 0.78);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer__credit a:hover {
+  color: var(--gold-bright);
+}
+
 .footer__legal {
   display: flex;
   gap: 1.3rem;
