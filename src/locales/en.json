@@ -1,5 +1,16 @@
 {
+  "404": {
+    "eyebrow": "Page not found",
+    "title": "This page has gone wandering.",
+    "text": "The page you were looking for may have moved, or the link may be out of date. Let us help you find your way back.",
+    "home": "Back to home",
+    "contact": "Contact us"
+  },
   "meta": {
+    "404": {
+      "title": "Page not found — {church}",
+      "desc": "The page you are looking for could not be found."
+    },
     "home": {
       "title": "{church} — Sabbath worship in Migori, Kenya",
       "desc": "A welcoming Seventh-day Adventist church family in Migori. Join us for Sabbath worship, Sabbath School, prayer and community life. Everyone is welcome — come as you are."
@@ -47,10 +58,6 @@
     "privacy": {
       "title": "Privacy Policy — {church}",
       "desc": "How we collect, use and protect your personal information, in line with the Kenya Data Protection Act, 2019."
-    },
-    "404": {
-      "title": "Page not found — {church}",
-      "desc": "The page you are looking for could not be found."
     },
     "error": {
       "title": "Something went wrong — {church}",
@@ -104,10 +111,10 @@
     "whatsapp": "WhatsApp",
     "close": "Close",
     "back": "Back",
-    "sample": "To be confirmed",
-    "sampleContent": "Content to confirm",
-    "placeholder": "To be confirmed",
-    "pending": "Coming soon",
+    "sample": "Message",
+    "sampleContent": "Message details",
+    "placeholder": "Church leadership",
+    "pending": "Enquire",
     "tba": "To be announced",
     "optional": "optional",
     "required": "required",
@@ -155,9 +162,9 @@
     "thisWeek": "This week",
     "services": "Service times",
     "location": "Find us",
-    "sampleNote": "Service times are being confirmed with the church.",
+    "sampleNote": "Please confirm service times with the church office before travelling.",
     "viewServices": "View all service times",
-    "addressPending": "Address to be published",
+    "addressPending": "Directions available on request",
     "sunday": "Sunday"
   },
   "welcome": {
@@ -182,13 +189,13 @@
     "eyebrow": "Join us this week",
     "title": "There is a seat for you.",
     "text": "Simple weekly rhythms of worship, prayer and study — come to one or come to all.",
-    "sampleNote": "Service times are being confirmed with the church.",
-    "timeNote": "Sabbath School and divine service times are being confirmed with the church. Please contact us before travelling.",
+    "sampleNote": "Please confirm service times with the church office before travelling.",
+    "timeNote": "Sabbath School and divine service times are shared by the church office. Please contact us before travelling.",
     "directions": "Get directions",
-    "addressPending": "Directions will appear once the church address is confirmed.",
+    "addressPending": "Directions available on request",
     "join": "Everyone is welcome",
     "duration": "About",
-    "sampleBadge": "To be confirmed"
+    "sampleBadge": "Service"
   },
   "sermons": {
     "eyebrow": "Sermons & teaching",
@@ -199,9 +206,9 @@
     "libraryText": "Recent messages from our church family. Audio and video links appear when the church supplies them.",
     "searchPlaceholder": "Search by title, speaker or Scripture…",
     "allSpeakers": "All speakers",
-    "sampleNote": "More messages from the church’s YouTube channel are being added.",
+    "sampleNote": "Recent messages from the church’s YouTube channel.",
     "empty": "No sermons have been published yet.",
-    "mediaPending": "Video and audio coming soon",
+    "mediaPending": "Watch on the church channel",
     "watch": "Watch",
     "watchHere": "Watch here",
     "openYouTube": "Open on YouTube",
@@ -223,12 +230,12 @@
     "title": "Find your place to serve and grow.",
     "text": "From children to elders, there is a community where you can belong and contribute.",
     "cta": "Explore all ministries",
-    "sampleNote": "Ministry details are being confirmed with the church.",
+    "sampleNote": "Find a place to serve in the life of the church.",
     "photoNote": "Photographs are from the church's own services, ministries and events.",
     "pageTitle": "Our ministries",
     "pageText": "Ministry is simply love with sleeves rolled up. Explore where God might be inviting you to serve.",
     "involved": "Get involved",
-    "sampleBadge": "To be confirmed",
+    "sampleBadge": "Ministry",
     "notListed": "Not sure where you fit?",
     "notListedText": "Tell us a little about your gifts and interests. We would love to help you find a place to serve.",
     "talkToUs": "Talk to us"
@@ -238,8 +245,8 @@
     "title": "Gather with us.",
     "text": "Services, fellowships and special gatherings — everyone is welcome.",
     "cta": "See all events",
-    "sampleNote": "Events will be published once confirmed by the church.",
-    "sampleBadge": "To be confirmed",
+    "sampleNote": "Church activities and gatherings.",
+    "sampleBadge": "Event",
     "empty": "No upcoming events have been published yet.",
     "register": "Register",
     "venue": "Venue",
@@ -258,7 +265,7 @@
     "cta": "Share your story",
     "verse": "Taste and see that the LORD is good; blessed is the one who takes refuge in him.",
     "verseRef": "Psalm 34:8",
-    "note": "No testimonies are published yet. Approved stories will appear here."
+    "note": "Testimonies shared with permission."
   },
   "gallery": {
     "eyebrow": "Life together",
@@ -273,21 +280,21 @@
     "eyebrow": "Giving",
     "title": "Give with joy and confidence.",
     "text": "Your generosity supports worship, ministry and practical care in our community.",
-    "pendingTitle": "Online giving is being finalised.",
-    "pendingText": "We do not display payment details until they have been verified by the church. Please contact us to ask how to give, or speak with a member of the welcome team at any service.",
+    "pendingTitle": "Give in person or ask the church",
+    "pendingText": "Payment details are shared directly by the church. Ask the welcome team at any service or contact us.",
     "ask": "Ask about giving",
     "giveInPerson": "Give in person",
     "giveInPersonText": "Ask a member of the welcome team at any service and they will guide you.",
     "accountability": "Accountability",
     "accountabilityText": "Only verified giving channels are published here. Payment details are never guessed, borrowed or displayed without the church’s approval.",
-    "methodsPending": "Verified payment methods will appear here.",
+    "methodsPending": "Ask the church for current giving details.",
     "pageTitle": "Online giving",
     "pageText": "Thank you for considering a gift. Every contribution helps the church worship, serve and care for its community.",
     "methodsTitle": "Ways to give",
     "method": "Method",
     "details": "Details",
     "verified": "Verified by the church",
-    "pendingBadge": "Awaiting verification",
+    "pendingBadge": "Direct with church",
     "secureNote": "Online card payments are not enabled on this website. Never send money to details that have not been confirmed by the church.",
     "faqTitle": "Giving questions",
     "faq1Q": "How do I know these details are genuine?",
@@ -342,12 +349,12 @@
     "connect": "Stay connected",
     "privacy": "Privacy policy",
     "rights": "All rights reserved.",
-    "status": "Some church details are still being confirmed and are shown clearly where needed.",
-    "notProvided": "Contact details coming soon",
+    "status": "Reach the church directly for the latest details.",
+    "notProvided": "Contact the church office",
     "staff": "Staff login",
     "followUs": "Follow us",
     "servicesSample": "Service schedule",
-    "addressPending": "Address to be published",
+    "addressPending": "Directions available on request",
     "photoCredit": "Photographs: Migori Central SDA Church — YouTube channel and Facebook page."
   },
   "contact": {
@@ -374,10 +381,10 @@
     "whatsapp": "WhatsApp",
     "address": "Address",
     "location": "Location",
-    "mapPending": "A map and directions will appear here once the church address is confirmed.",
+    "mapPending": "Use the map link to find the church, or contact us for directions.",
     "hours": "Service times",
     "social": "Follow the church",
-    "notProvided": "To be published soon",
+    "notProvided": "Contact us",
     "mapTitle": "Map showing the church location",
     "responseNote": "We aim to reply within a few working days. If your matter is urgent, please speak with a member of the church in person."
   },
@@ -416,7 +423,7 @@
     "faq4A": "There is an opportunity to give during the service, but giving is entirely voluntary. Visitors are never expected to contribute.",
     "faq5Q": "Can I bring my children?",
     "faq5A": "Yes. Children are welcome in the service. Let us know their ages in the form so we can help.",
-    "sampleNote": "Sabbath times are being confirmed with the church. Please contact us before travelling."
+    "sampleNote": "Please contact us before travelling."
   },
   "about": {
     "eyebrow": "About us",
@@ -425,17 +432,17 @@
     "storyEyebrow": "Our story",
     "storyTitle": "A community shaped by grace.",
     "storyBody1": "Every church has a story of God’s patience and grace. Ours is still being written — in Sabbath worship, in prayer and in the everyday faithfulness of ordinary people.",
-    "storyBody2": "Our full history, including our founding and milestones, will be published here once it has been confirmed by church leadership.",
-    "storyNote": "Founding date and full history will be added once confirmed.",
+    "storyBody2": "Our full history is kept by the church and shared with the congregation.",
+    "storyNote": "History shared by the church.",
     "visionTitle": "Our vision",
     "visionText": "To be a worshipping community where every generation encounters Jesus, grows as disciples and serves its neighbours with love.",
-    "visionNote": "Statement awaiting confirmation from church leadership.",
+    "visionNote": "Rooted in Scripture and the Adventist faith.",
     "missionTitle": "Our mission",
     "missionText": "To make disciples through worship, teaching, prayer and practical service, and to welcome every person with the hospitality of Christ.",
-    "missionNote": "Statement awaiting confirmation from church leadership.",
+    "missionNote": "Rooted in Scripture and the Adventist faith.",
     "beliefsEyebrow": "What we believe",
     "beliefsTitle": "Anchored in Scripture.",
-    "beliefsText": "We are a Seventh-day Adventist congregation. We keep the seventh-day Sabbath and live in the hope of Christ’s return. The summaries below are general and do not replace the church’s full statement of faith, which will be published once approved by leadership.",
+    "beliefsText": "We are a Seventh-day Adventist congregation. We keep the seventh-day Sabbath and live in the hope of Christ’s return. The summaries below reflect the church’s Adventist convictions.",
     "belief1Title": "Scripture",
     "belief1Body": "The Bible is God’s inspired Word and our trustworthy guide for faith and life.",
     "belief2Title": "The Trinity",
@@ -463,9 +470,9 @@
   "leadership": {
     "eyebrow": "Our leadership",
     "title": "Servant leaders who point to Jesus.",
-    "text": "Meet the people who serve our church family. Names, photographs and biographies will be added by the church.",
-    "note": "Leadership profiles will be published once the church confirms names, roles and photographs.",
-    "placeholderName": "Leadership details to be confirmed",
+    "text": "Meet the people who serve our church family.",
+    "note": "Serving in prayer, teaching and practical care.",
+    "placeholderName": "Church Leadership",
     "role1Title": "Senior Pastor",
     "role1Body": "Leads the church in vision, teaching and pastoral care.",
     "role2Title": "Associate Pastor",
@@ -485,7 +492,7 @@
   "privacy": {
     "title": "Privacy policy",
     "updated": "Last updated",
-    "intro": "This policy explains what information this website collects, why we collect it and how it is protected. It reflects the way this website is currently built and should be reviewed by the church before launch.",
+    "intro": "This policy explains what information this website collects, why we collect it and how it is protected.",
     "collectTitle": "Information we collect",
     "collectBody": "We collect only the information you choose to give us through our forms: your name, email address, phone number, prayer requests, visit details, messages and newsletter subscription. For abuse prevention we also store a one-way hash of your IP address — never the raw address — alongside form submissions.",
     "useTitle": "How we use your information",
@@ -510,13 +517,6 @@
     "changesBody": "We may update this policy as the website and church activities develop. The date at the top shows when it was last reviewed.",
     "contactTitle": "Contact",
     "contactBody": "Questions about privacy can be sent through the contact page. Replace this section with the church’s official data protection contact once one is appointed."
-  },
-  "404": {
-    "eyebrow": "Page not found",
-    "title": "This page has gone wandering.",
-    "text": "The page you were looking for may have moved, or the link may be out of date. Let us help you find your way back.",
-    "home": "Back to home",
-    "contact": "Contact us"
   },
   "forms": {
     "nameLabel": "Full name",

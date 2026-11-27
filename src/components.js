@@ -253,7 +253,6 @@ function header({ page, locale, tfn, church, announcements = [] }) {
               <span class="announce__item${i > 0 ? ' announce__item--secondary' : ''}" ${locAttr(a, 'message', locale)} data-i18n-dynamic>${esc(loc(a, 'message', locale))}</span>
             `).join('<span class="announce__dot" aria-hidden="true"></span>')}
           </div>
-          ${announcements.some((a) => a.is_sample) ? `<span class="badge badge--onDark announce__badge">${esc(tfn('announce.sample'))}</span>` : ''}
           <a class="announce__link" href="/events"><span data-i18n="announce.eventsLink">${esc(tfn('announce.eventsLink'))}</span>${iconUse('arrow-right')}</a>
         </div>
       </div>`
@@ -421,7 +420,9 @@ function sectionHead({ eyebrow, title, text, align = 'left', onDark = false, id 
 }
 
 function sampleBadge(label, extraClass = '') {
-  return `<span class="badge ${extraClass}">${iconUse('sparkle')}${esc(label)}</span>`;
+  void label;
+  void extraClass;
+  return '';
 }
 
 function serviceCard(service, locale, tfn) {
@@ -454,7 +455,6 @@ function sermonCard(sermon, locale, tfn, options = {}) {
     <${mediaTag} ${mediaAttrs}>
       ${image}
       <span class="card-media__shade"></span>
-      ${sermon.is_sample ? `<span class="card-media__badge">${esc(tfn('common.sample'))}</span>` : ''}
       <span class="play-badge">${iconUse('play')}</span>
     </${mediaTag}>
     <div class="sermon-card__body">
@@ -491,7 +491,6 @@ function eventRow(event, locale, tfn, options = {}) {
     <div class="event-row__body">
       <div class="meta-row">
         <time datetime="${esc(event.starts_at)}" data-datetime="${esc(event.starts_at)}">${esc(formatDateTime(event.starts_at, locale))}</time>
-        ${event.is_sample ? sampleBadge(tfn('events.sampleBadge')) : ''}
       </div>
       <h3 class="event-row__title" ${locAttr(event, 'title', locale)}>${esc(loc(event, 'title', locale))}</h3>
       <p class="event-row__text" ${locAttr(event, 'description', locale)}>${esc(loc(event, 'description', locale))}</p>
@@ -513,7 +512,6 @@ function ministryCard(ministry, locale, tfn) {
     <div class="ministry-card__body">
       <div class="ministry-card__head">
         <span class="ministry-card__icon">${iconUse(iconName)}</span>
-        ${ministry.is_sample ? `<span class="badge badge--outline badge--xs">${esc(tfn('ministries.sampleBadge'))}</span>` : ''}
       </div>
       <h3 class="ministry-card__title" ${locAttr(ministry, 'name', locale)}>${esc(loc(ministry, 'name', locale))}</h3>
       <p class="ministry-card__text" ${locAttr(ministry, 'description', locale)}>${esc(loc(ministry, 'description', locale))}</p>

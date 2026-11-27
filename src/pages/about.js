@@ -136,7 +136,6 @@ function renderLeadership(ctx) {
           <p class="leader-card__role" data-i18n="leadership.${title}">${C.esc(tfn(`leadership.${title}`))}</p>
           <h2 class="leader-card__name" data-i18n="leadership.placeholderName">${C.esc(tfn('leadership.placeholderName'))}</h2>
           <p class="leader-card__text" data-i18n="leadership.${body}">${C.esc(tfn(`leadership.${body}`))}</p>
-          <span class="badge badge--outline badge--xs">${C.esc(tfn('common.placeholder'))}</span>
         </article>`).join('')}
       </div>
     </div>
